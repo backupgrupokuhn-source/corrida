@@ -322,7 +322,7 @@ input[type="text"]::placeholder { color:#CCC; font-weight:400; }
 // ================================================================
 // ⚙️ URL DO APPS SCRIPT
 // ================================================================
-const APPS_SCRIPT_URL = 'https://script.google.com/macros/library/d/1AxGXHjVN5OFH9Tvz2i3P1U2lFSyC3sxJpdEWBSNJYrBWtJmCinqu47gQ/2';
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwdXzKRG0Eg8bCmmeKbgA8Bl-ktHe4icYa8BQYiPr4sza9PP4w-vTewQsPTPnZQEaEY/exec';
 
 // ================================================================
 // ESTADO
@@ -414,7 +414,7 @@ async function validarAcesso() {
   btn.disabled  = true;
 
   // Modo demo se URL não configurada
-  if (APPS_SCRIPT_URL === 'COLE_AQUI_A_URL_DO_SEU_WEB_APP') {
+  if (APPS_SCRIPT_URL === 'https://script.google.com/macros/s/AKfycbwdXzKRG0Eg8bCmmeKbgA8Bl-ktHe4icYa8BQYiPr4sza9PP4w-vTewQsPTPnZQEaEY/exec') {
     premios    = getPremiosDemo();
     nomeAtual  = nome;
     lojaAtual  = loja;
@@ -622,7 +622,7 @@ async function mostrarResultado(premio) {
                   agora.toLocaleTimeString('pt-BR', { hour:'2-digit', minute:'2-digit' });
 
   // Registra no Sheets com todos os dados
-  if (APPS_SCRIPT_URL !== 'COLE_AQUI_A_URL_DO_SEU_WEB_APP') {
+  if (APPS_SCRIPT_URL !== 'https://script.google.com/macros/s/AKfycbwdXzKRG0Eg8bCmmeKbgA8Bl-ktHe4icYa8BQYiPr4sza9PP4w-vTewQsPTPnZQEaEY/exec') {
     try {
       const url = `${APPS_SCRIPT_URL}?acao=registrar`
         + `&senha=${encodeURIComponent(senhaAtual)}`
