@@ -3,215 +3,85 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Roleta da Páscoa 🐣 Grupo Kuhn</title>
+<title>Roleta da Páscoa — Grupo Kuhn</title>
 <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 :root {
   --laranja: #F4721B;
   --laranja-escuro: #C45A0E;
-  --amarelo: #FFD700;
   --marrom: #6B3A1F;
   --creme: #FFF8EE;
-  --verde: #4CAF50;
 }
 * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
-body {
-  font-family: 'Nunito', sans-serif;
-  background: var(--creme);
-  min-height: 100vh;
-  overflow-x: hidden;
-}
+body { font-family:'Nunito',sans-serif; background:var(--creme); min-height:100vh; overflow-x:hidden; }
 body::before {
-  content:'';
-  position:fixed; inset:0;
-  background:
-    radial-gradient(ellipse at 20% 0%, #FFE0B2 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 100%, #FFCCBC 0%, transparent 50%),
-    var(--creme);
+  content:''; position:fixed; inset:0;
+  background: radial-gradient(ellipse at 20% 0%, #FFE0B2 0%, transparent 50%),
+              radial-gradient(ellipse at 80% 100%, #FFCCBC 0%, transparent 50%), var(--creme);
   z-index:0;
 }
-.egg-deco {
-  position:fixed; font-size:2rem; opacity:0.12;
-  animation:floatEgg 6s ease-in-out infinite;
-  pointer-events:none; z-index:0;
-}
+.egg-deco { position:fixed; font-size:2rem; opacity:0.12; animation:floatEgg 6s ease-in-out infinite; pointer-events:none; z-index:0; }
 .egg-deco:nth-child(1){top:5%;left:5%;animation-delay:0s;font-size:2.5rem}
 .egg-deco:nth-child(2){top:15%;right:8%;animation-delay:1s;font-size:1.8rem}
 .egg-deco:nth-child(3){top:60%;left:3%;animation-delay:2s;font-size:3rem}
 .egg-deco:nth-child(4){top:70%;right:5%;animation-delay:.5s;font-size:2rem}
 .egg-deco:nth-child(5){bottom:10%;left:15%;animation-delay:1.5s;font-size:2.2rem}
 .egg-deco:nth-child(6){bottom:5%;right:20%;animation-delay:3s;font-size:1.5rem}
-@keyframes floatEgg {
-  0%,100%{transform:translateY(0) rotate(-10deg)}
-  50%{transform:translateY(-15px) rotate(10deg)}
-}
-.container {
-  position:relative; z-index:1;
-  max-width:480px; margin:0 auto;
-  padding:20px 16px 40px;
-  min-height:100vh;
-}
-/* HEADER */
+@keyframes floatEgg { 0%,100%{transform:translateY(0) rotate(-10deg)} 50%{transform:translateY(-15px) rotate(10deg)} }
+.container { position:relative; z-index:1; max-width:480px; margin:0 auto; padding:20px 16px 40px; min-height:100vh; }
 .header { text-align:center; margin-bottom:24px; animation:slideDown .6s ease; }
-@keyframes slideDown {
-  from{opacity:0;transform:translateY(-30px)}
-  to{opacity:1;transform:translateY(0)}
-}
-.logo-area {
-  background:var(--laranja); border-radius:20px;
-  padding:14px 20px 10px; display:inline-block;
-  box-shadow:0 6px 20px rgba(244,114,27,.4); margin-bottom:12px;
-}
+@keyframes slideDown { from{opacity:0;transform:translateY(-30px)} to{opacity:1;transform:translateY(0)} }
+.logo-area { background:var(--laranja); border-radius:20px; padding:14px 20px 10px; display:inline-block; box-shadow:0 6px 20px rgba(244,114,27,.4); margin-bottom:12px; }
 .logo-text { font-family:'Fredoka One',cursive; font-size:1rem; color:rgba(255,255,255,.85); letter-spacing:1px; }
 .logo-grupo { font-family:'Fredoka One',cursive; font-size:1.8rem; color:white; line-height:1; }
 .title-pascoa { font-family:'Fredoka One',cursive; font-size:2.2rem; color:var(--marrom); line-height:1.1; }
 .title-pascoa span { color:var(--laranja); }
 .subtitle { font-size:.9rem; color:#8B6347; margin-top:4px; font-weight:600; }
-
-/* CARD */
-.card {
-  background:white; border-radius:24px; padding:28px 24px;
-  box-shadow:0 8px 32px rgba(107,58,31,.12);
-  border:2px solid rgba(244,114,27,.15);
-}
+.card { background:white; border-radius:24px; padding:28px 24px; box-shadow:0 8px 32px rgba(107,58,31,.12); border:2px solid rgba(244,114,27,.15); }
 .card-title { font-family:'Fredoka One',cursive; font-size:1.4rem; color:var(--marrom); text-align:center; margin-bottom:6px; }
 .card-sub { font-size:.85rem; color:#999; text-align:center; margin-bottom:20px; }
 .field-group { margin-bottom:16px; }
 label { display:block; font-size:.8rem; font-weight:800; color:var(--marrom); margin-bottom:6px; text-transform:uppercase; letter-spacing:.5px; }
-input[type="text"] {
-  width:100%; padding:14px 16px;
-  border:2px solid #F0E0D0; border-radius:14px;
-  font-size:1.1rem; font-family:'Nunito',sans-serif; font-weight:700;
-  color:var(--marrom); background:#FDFAF7; outline:none; transition:all .2s;
-}
-input[type="text"]:focus {
-  border-color:var(--laranja); background:white;
-  box-shadow:0 0 0 4px rgba(244,114,27,.1);
-}
+input[type="text"] { width:100%; padding:14px 16px; border:2px solid #F0E0D0; border-radius:14px; font-size:1.05rem; font-family:'Nunito',sans-serif; font-weight:700; color:var(--marrom); background:#FDFAF7; outline:none; transition:all .2s; }
+input[type="text"]:focus { border-color:var(--laranja); background:white; box-shadow:0 0 0 4px rgba(244,114,27,.1); }
 input[type="text"]::placeholder { color:#CCC; font-weight:400; }
-.btn-primary {
-  width:100%; padding:16px;
-  background:linear-gradient(135deg, var(--laranja), var(--laranja-escuro));
-  color:white; border:none; border-radius:16px;
-  font-family:'Fredoka One',cursive; font-size:1.3rem;
-  cursor:pointer; box-shadow:0 6px 20px rgba(244,114,27,.4);
-  transition:all .2s; margin-top:8px;
-}
+.btn-primary { width:100%; padding:16px; background:linear-gradient(135deg, var(--laranja), var(--laranja-escuro)); color:white; border:none; border-radius:16px; font-family:'Fredoka One',cursive; font-size:1.3rem; cursor:pointer; box-shadow:0 6px 20px rgba(244,114,27,.4); transition:all .2s; margin-top:8px; }
 .btn-primary:active { transform:scale(.97); }
 .btn-primary:disabled { background:#CCC; box-shadow:none; cursor:not-allowed; }
-.error-msg {
-  background:#FFE8E8; border:1px solid #FFB3B3; border-radius:12px;
-  padding:12px 16px; color:#CC3333; font-size:.9rem; font-weight:700;
-  text-align:center; margin-top:12px; animation:shake .4s ease;
-}
-@keyframes shake {
-  0%,100%{transform:translateX(0)} 25%{transform:translateX(-8px)} 75%{transform:translateX(8px)}
-}
-
-/* ROLETA */
-.screen { display:none; animation:fadeIn .5s ease; }
-.screen.active { display:block; }
-@keyframes fadeIn {
-  from{opacity:0;transform:translateY(20px)}
-  to{opacity:1;transform:translateY(0)}
-}
-.vendedor-badge {
-  background:linear-gradient(135deg, var(--laranja), #FFB347);
-  border-radius:50px; padding:10px 20px; text-align:center;
-  margin-bottom:20px; box-shadow:0 4px 14px rgba(244,114,27,.3);
-}
+.error-msg { background:#FFE8E8; border:1px solid #FFB3B3; border-radius:12px; padding:12px 16px; color:#CC3333; font-size:.9rem; font-weight:700; text-align:center; margin-top:12px; animation:shake .4s ease; }
+@keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-8px)} 75%{transform:translateX(8px)} }
+.screen { display:none; }
+.screen.active { display:block; animation:fadeIn .5s ease; }
+@keyframes fadeIn { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+.vendedor-badge { background:linear-gradient(135deg, var(--laranja), #FFB347); border-radius:50px; padding:10px 20px; text-align:center; margin-bottom:20px; box-shadow:0 4px 14px rgba(244,114,27,.3); }
 .vendedor-badge span { font-size:.75rem; color:rgba(255,255,255,.85); font-weight:700; text-transform:uppercase; letter-spacing:1px; }
 .vendedor-badge strong { display:block; font-family:'Fredoka One',cursive; font-size:1.4rem; color:white; line-height:1.1; }
-
-.wheel-container {
-  position:relative; display:flex;
-  flex-direction:column; align-items:center; margin-bottom:20px;
-}
-.wheel-arrow {
-  position:absolute; top:-14px; left:50%;
-  transform:translateX(-50%); z-index:10;
-  filter:drop-shadow(0 3px 6px rgba(0,0,0,.3));
-}
-.wheel-wrapper {
-  position:relative; width:320px; height:320px; border-radius:50%;
-  box-shadow:0 0 0 6px white, 0 0 0 10px var(--laranja), 0 10px 40px rgba(107,58,31,.25);
-}
+.wheel-container { position:relative; display:flex; flex-direction:column; align-items:center; margin-bottom:20px; }
+.wheel-arrow { position:absolute; top:-14px; left:50%; transform:translateX(-50%); z-index:10; filter:drop-shadow(0 3px 6px rgba(0,0,0,.3)); }
+.wheel-wrapper { position:relative; width:320px; height:320px; border-radius:50%; box-shadow:0 0 0 6px white, 0 0 0 10px var(--laranja), 0 10px 40px rgba(107,58,31,.25); }
 #wheel-canvas { width:320px; height:320px; border-radius:50%; display:block; }
-.wheel-center {
-  position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
-  width:56px; height:56px; background:white; border-radius:50%;
-  border:4px solid var(--laranja); display:flex; align-items:center;
-  justify-content:center; font-size:1.6rem;
-  box-shadow:0 4px 12px rgba(0,0,0,.15); z-index:5;
-}
-.btn-spin {
-  width:100%; padding:18px;
-  background:linear-gradient(135deg, #FFD700, #FFA500);
-  color:var(--marrom); border:none; border-radius:16px;
-  font-family:'Fredoka One',cursive; font-size:1.5rem;
-  cursor:pointer; box-shadow:0 6px 20px rgba(255,165,0,.5);
-  transition:all .2s; margin-top:16px;
-}
+.wheel-center { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:56px; height:56px; background:white; border-radius:50%; border:4px solid var(--laranja); display:flex; align-items:center; justify-content:center; font-size:1.6rem; box-shadow:0 4px 12px rgba(0,0,0,.15); z-index:5; }
+.btn-spin { width:100%; padding:18px; background:linear-gradient(135deg, #FFD700, #FFA500); color:var(--marrom); border:none; border-radius:16px; font-family:'Fredoka One',cursive; font-size:1.5rem; cursor:pointer; box-shadow:0 6px 20px rgba(255,165,0,.5); transition:all .2s; margin-top:16px; }
 .btn-spin:active { transform:scale(.97); }
 .btn-spin:disabled { background:#EEE; color:#AAA; box-shadow:none; cursor:not-allowed; }
-
-/* RESULTADO */
-.resultado-card {
-  background:white; border-radius:24px; overflow:hidden;
-  box-shadow:0 12px 40px rgba(107,58,31,.2); margin-bottom:16px;
-}
-.resultado-header {
-  background:linear-gradient(135deg, var(--laranja), var(--laranja-escuro));
-  padding:24px 20px; text-align:center;
-}
+.resultado-card { background:white; border-radius:24px; overflow:hidden; box-shadow:0 12px 40px rgba(107,58,31,.2); margin-bottom:16px; }
+.resultado-header { background:linear-gradient(135deg, var(--laranja), var(--laranja-escuro)); padding:24px 20px; text-align:center; }
 .resultado-emoji { font-size:3.5rem; display:block; margin-bottom:4px; animation:bounceIn .6s ease; }
-@keyframes bounceIn {
-  0%{transform:scale(0)} 60%{transform:scale(1.2)} 100%{transform:scale(1)}
-}
+@keyframes bounceIn { 0%{transform:scale(0)} 60%{transform:scale(1.2)} 100%{transform:scale(1)} }
 .resultado-titulo { font-family:'Fredoka One',cursive; font-size:1.2rem; color:white; opacity:.9; }
 .resultado-premio { font-family:'Fredoka One',cursive; font-size:1.9rem; color:white; line-height:1.1; margin-top:4px; }
 .resultado-body { padding:20px; }
-.info-row {
-  display:flex; justify-content:space-between; align-items:center;
-  padding:10px 0; border-bottom:1px solid #F5EEE8; font-size:.9rem;
-}
+.info-row { display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-bottom:1px solid #F5EEE8; font-size:.9rem; }
 .info-row:last-child { border-bottom:none; }
 .info-label { color:#999; font-weight:700; text-transform:uppercase; font-size:.75rem; letter-spacing:.5px; }
-.info-value { font-weight:800; color:var(--marrom); }
-.codigo-cupom {
-  background:#FFF8EE; border:2px dashed var(--laranja);
-  border-radius:12px; padding:14px; text-align:center; margin:16px 0;
-}
+.info-value { font-weight:800; color:var(--marrom); text-align:right; max-width:65%; }
+.codigo-cupom { background:#FFF8EE; border:2px dashed var(--laranja); border-radius:12px; padding:14px; text-align:center; margin:16px 0; }
 .codigo-label { font-size:.75rem; font-weight:800; color:#999; text-transform:uppercase; letter-spacing:1px; }
 .codigo-valor { font-family:'Fredoka One',cursive; font-size:2rem; color:var(--laranja); letter-spacing:3px; }
-.btn-cupom {
-  width:100%; padding:16px;
-  background:linear-gradient(135deg, var(--verde), #388E3C);
-  color:white; border:none; border-radius:16px;
-  font-family:'Fredoka One',cursive; font-size:1.3rem;
-  cursor:pointer; box-shadow:0 6px 20px rgba(76,175,80,.4); transition:all .2s;
-}
-.btn-cupom:active { transform:scale(.97); }
-#cupom-canvas { display:none; }
-
-/* LOADING */
-.loading {
-  display:inline-block; width:18px; height:18px;
-  border:3px solid rgba(255,255,255,.3); border-top-color:white;
-  border-radius:50%; animation:spin .8s linear infinite;
-  vertical-align:middle; margin-right:8px;
-}
+.loading { display:inline-block; width:18px; height:18px; border:3px solid rgba(255,255,255,.3); border-top-color:white; border-radius:50%; animation:spin .8s linear infinite; vertical-align:middle; margin-right:8px; }
 @keyframes spin { to{transform:rotate(360deg)} }
-
-/* CONFETTI */
-.confetti-piece {
-  position:fixed; top:-10px; border-radius:2px;
-  animation:confettiFall linear forwards; pointer-events:none; z-index:999;
-}
-@keyframes confettiFall {
-  0%{transform:translateY(0) rotate(0deg);opacity:1}
-  100%{transform:translateY(100vh) rotate(720deg);opacity:0}
-}
+.confetti-piece { position:fixed; top:-10px; border-radius:2px; animation:confettiFall linear forwards; pointer-events:none; z-index:999; }
+@keyframes confettiFall { 0%{transform:translateY(0) rotate(0deg);opacity:1} 100%{transform:translateY(100vh) rotate(720deg);opacity:0} }
 </style>
 </head>
 <body>
@@ -224,7 +94,6 @@ input[type="text"]::placeholder { color:#CCC; font-weight:400; }
 <div class="egg-deco">🍀</div>
 
 <div class="container">
-
   <div class="header">
     <div class="logo-area">
       <div class="logo-text">GRUPO</div>
@@ -234,7 +103,7 @@ input[type="text"]::placeholder { color:#CCC; font-weight:400; }
     <div class="subtitle">Gire e ganhe um prêmio especial!</div>
   </div>
 
-  <!-- TELA LOGIN -->
+  <!-- TELA 1: LOGIN -->
   <div id="screen-login" class="screen active">
     <div class="card">
       <div class="card-title">✨ Seu presente te espera</div>
@@ -255,14 +124,12 @@ input[type="text"]::placeholder { color:#CCC; font-weight:400; }
         <label>🔑 Senha da campanha</label>
         <input type="text" id="input-senha" placeholder="Ex: COELHO-847" autocomplete="off">
       </div>
-      <button class="btn-primary" id="btn-entrar" onclick="validarAcesso()">
-        Girar a Roleta!
-      </button>
+      <button class="btn-primary" id="btn-entrar" onclick="validarAcesso()">Confirmar</button>
       <div id="error-login" class="error-msg" style="display:none"></div>
     </div>
   </div>
 
-  <!-- TELA ROLETA -->
+  <!-- TELA 2: ROLETA -->
   <div id="screen-roleta" class="screen">
     <div class="vendedor-badge">
       <span>Participante</span>
@@ -278,12 +145,10 @@ input[type="text"]::placeholder { color:#CCC; font-weight:400; }
         <div class="wheel-center">🌸</div>
       </div>
     </div>
-    <button class="btn-spin" id="btn-spin" onclick="girarRoleta()">
-      GIRAR A ROLETA!
-    </button>
+    <button class="btn-spin" id="btn-spin" onclick="girarRoleta()">GIRAR A ROLETA!</button>
   </div>
 
-  <!-- TELA RESULTADO -->
+  <!-- TELA 3: RESULTADO -->
   <div id="screen-resultado" class="screen">
     <div class="resultado-card">
       <div class="resultado-header">
@@ -292,22 +157,10 @@ input[type="text"]::placeholder { color:#CCC; font-weight:400; }
         <div class="resultado-premio" id="res-premio">—</div>
       </div>
       <div class="resultado-body">
-        <div class="info-row">
-          <span class="info-label">Vendedor</span>
-          <span class="info-value" id="res-vendedor">—</span>
-        </div>
-        <div class="info-row">
-          <span class="info-label">Data</span>
-          <span class="info-value" id="res-data">—</span>
-        </div>
-        <div class="info-row">
-          <span class="info-label">Loja</span>
-          <span class="info-value" id="res-loja">—</span>
-        </div>
-        <div class="info-row">
-          <span class="info-label">PIX</span>
-          <span class="info-value" id="res-pix">—</span>
-        </div>
+        <div class="info-row"><span class="info-label">Vendedor</span><span class="info-value" id="res-vendedor">—</span></div>
+        <div class="info-row"><span class="info-label">Loja</span><span class="info-value" id="res-loja">—</span></div>
+        <div class="info-row"><span class="info-label">PIX</span><span class="info-value" id="res-pix">—</span></div>
+        <div class="info-row"><span class="info-label">Data</span><span class="info-value" id="res-data">—</span></div>
         <div class="codigo-cupom">
           <div class="codigo-label">Código do cupom</div>
           <div class="codigo-valor" id="res-codigo">—</div>
@@ -315,85 +168,63 @@ input[type="text"]::placeholder { color:#CCC; font-weight:400; }
       </div>
     </div>
   </div>
-
 </div>
 
 <script>
 // ================================================================
-// ⚙️ URL DO APPS SCRIPT
+// URL DO APPS SCRIPT
 // ================================================================
 const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwdXzKRG0Eg8bCmmeKbgA8Bl-ktHe4icYa8BQYiPr4sza9PP4w-vTewQsPTPnZQEaEY/exec';
 
 // ================================================================
 // ESTADO
 // ================================================================
-let premios = [];
-let resultadoAtual = null;
-let nomeAtual  = '';
-let lojaAtual  = '';
-let pixAtual   = '';
-let senhaAtual = '';
-let isSpinning = false;
+let premios     = [];
+let nomeAtual   = '';
+let lojaAtual   = '';
+let pixAtual    = '';
+let senhaAtual  = '';
+let isSpinning  = false;
+let jaGirou     = false;
 let anguloAtual = 0;
 
-const CORES = [
-  '#F4721B','#FFD700','#FF8C42','#4CAF50',
-  '#FF6B9D','#9C27B0','#2196F3','#FF5722',
-  '#8BC34A','#F06292'
-];
+const CORES = ['#F4721B','#FFD700','#FF8C42','#4CAF50','#FF6B9D','#9C27B0','#2196F3','#FF5722','#8BC34A','#F06292'];
 
-// ================================================================
-// NAVEGAÇÃO ENTRE TELAS
-// ================================================================
 function mostrarTela(id) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
 }
 
 // ================================================================
-// TELA 1 — LOGIN
+// JSONP
 // ================================================================
-document.addEventListener('DOMContentLoaded', () => {
-  document.getElementById('input-senha').addEventListener('keypress', e => {
-    if (e.key === 'Enter') validarAcesso();
-  });
-  document.getElementById('input-nome').addEventListener('keypress', e => {
-    if (e.key === 'Enter') validarAcesso();
-  });
-});
-
-// ================================================================
-// JSONP — único jeito de chamar Apps Script de página estática
-// ================================================================
-function jsonp(url, callback) {
+function jsonp(url) {
   return new Promise((resolve, reject) => {
-    const cbName = '__cb_' + Date.now();
-    const timeout = setTimeout(() => {
-      delete window[cbName];
-      if (script.parentNode) script.parentNode.removeChild(script);
-      reject(new Error('timeout'));
-    }, 10000);
-
-    window[cbName] = (data) => {
-      clearTimeout(timeout);
-      delete window[cbName];
-      if (script.parentNode) script.parentNode.removeChild(script);
-      resolve(data);
-    };
-
+    const cbName = '__cb_' + Date.now() + '_' + Math.floor(Math.random() * 99999);
     const script = document.createElement('script');
-    script.src = url + '&callback=' + cbName;
-    script.onerror = () => {
-      clearTimeout(timeout);
+    const timer  = setTimeout(() => { cleanup(); reject(new Error('timeout')); }, 12000);
+
+    function cleanup() {
+      clearTimeout(timer);
       delete window[cbName];
-      reject(new Error('script error'));
-    };
+      if (script.parentNode) script.parentNode.removeChild(script);
+    }
+
+    window[cbName] = function(data) { cleanup(); resolve(data); };
+    script.onerror = function() { cleanup(); reject(new Error('erro')); };
+    script.src = url + (url.includes('?') ? '&' : '?') + 'callback=' + cbName;
     document.head.appendChild(script);
   });
 }
 
-// Senha já usada nesta sessão — trava dupla no frontend
-let senhaJaUsada = false;
+// ================================================================
+// TELA 1 — LOGIN
+// ================================================================
+document.addEventListener('DOMContentLoaded', () => {
+  ['input-nome','input-loja','input-pix','input-senha'].forEach(id => {
+    document.getElementById(id).addEventListener('keypress', e => { if (e.key === 'Enter') validarAcesso(); });
+  });
+});
 
 async function validarAcesso() {
   const nome  = document.getElementById('input-nome').value.trim();
@@ -401,33 +232,25 @@ async function validarAcesso() {
   const pix   = document.getElementById('input-pix').value.trim();
   const senha = document.getElementById('input-senha').value.trim().toUpperCase();
   const btn   = document.getElementById('btn-entrar');
-  const err   = document.getElementById('error-login');
 
-  err.style.display = 'none';
+  document.getElementById('error-login').style.display = 'none';
 
-  if (!nome)  { mostrarErro('Por favor, informe seu nome.');    return; }
-  if (!loja)  { mostrarErro('Por favor, informe sua loja.');    return; }
-  if (!pix)   { mostrarErro('Por favor, informe seu PIX.');     return; }
-  if (!senha) { mostrarErro('Por favor, informe a senha.');     return; }
+  if (!nome)  { mostrarErro('Informe seu nome.');   return; }
+  if (!loja)  { mostrarErro('Informe sua loja.');   return; }
+  if (!pix)   { mostrarErro('Informe seu PIX.');    return; }
+  if (!senha) { mostrarErro('Informe a senha.');    return; }
 
   btn.innerHTML = '<span class="loading"></span>Verificando...';
   btn.disabled  = true;
 
-  // Modo demo se URL não configurada
-  if (APPS_SCRIPT_URL === 'https://script.google.com/macros/s/AKfycbwdXzKRG0Eg8bCmmeKbgA8Bl-ktHe4icYa8BQYiPr4sza9PP4w-vTewQsPTPnZQEaEY/exec') {
-    premios    = getPremiosDemo();
-    nomeAtual  = nome;
-    lojaAtual  = loja;
-    pixAtual   = pix;
-    senhaAtual = senha;
-    irParaRoleta();
-    btn.innerHTML = 'Confirmar';
-    btn.disabled  = false;
-    return;
-  }
-
   try {
-    const url  = `${APPS_SCRIPT_URL}?acao=validar&senha=${encodeURIComponent(senha)}&nome=${encodeURIComponent(nome)}&loja=${encodeURIComponent(loja)}&pix=${encodeURIComponent(pix)}`;
+    const url = APPS_SCRIPT_URL
+      + '?acao=validar'
+      + '&senha=' + encodeURIComponent(senha)
+      + '&nome='  + encodeURIComponent(nome)
+      + '&loja='  + encodeURIComponent(loja)
+      + '&pix='   + encodeURIComponent(pix);
+
     const data = await jsonp(url);
 
     if (data.ok) {
@@ -436,9 +259,6 @@ async function validarAcesso() {
       pixAtual   = pix;
       senhaAtual = senha;
       premios    = data.premios;
-      // Trava o botão permanentemente — senha consumida no Sheets
-      btn.innerHTML = 'Confirmar';
-      btn.disabled  = false;
       irParaRoleta();
     } else {
       mostrarErro(data.mensagem || 'Senha inválida ou já utilizada.');
@@ -446,7 +266,7 @@ async function validarAcesso() {
       btn.disabled  = false;
     }
   } catch (e) {
-    mostrarErro('Erro ao conectar. Verifique a URL do Web App.');
+    mostrarErro('Erro de conexão. Tente novamente.');
     console.error(e);
     btn.innerHTML = 'Confirmar';
     btn.disabled  = false;
@@ -455,23 +275,8 @@ async function validarAcesso() {
 
 function mostrarErro(msg) {
   const el = document.getElementById('error-login');
-  el.textContent = msg;
+  el.textContent   = msg;
   el.style.display = 'block';
-}
-
-function getPremiosDemo() {
-  return [
-    { nome:'Desconto 10%',     emoji:'🏷️', probabilidade:30 },
-    { nome:'Desconto 20%',     emoji:'🎁', probabilidade:20 },
-    { nome:'Desconto 30%',     emoji:'🔥', probabilidade:10 },
-    { nome:'Brinde Surpresa',  emoji:'🎀', probabilidade:15 },
-    { nome:'Frete Grátis',     emoji:'🚚', probabilidade:10 },
-    { nome:'Lente Grátis',     emoji:'👓', probabilidade: 5 },
-    { nome:'Armação Grátis',   emoji:'🕶️', probabilidade: 3 },
-    { nome:'Vale R$ 50',       emoji:'💰', probabilidade: 4 },
-    { nome:'Limpeza Grátis',   emoji:'✨', probabilidade: 2 },
-    { nome:'Consultoria',      emoji:'⭐', probabilidade: 1 },
-  ];
 }
 
 // ================================================================
@@ -486,12 +291,10 @@ function irParaRoleta() {
 function desenharRoleta(angulo) {
   const canvas = document.getElementById('wheel-canvas');
   const ctx    = canvas.getContext('2d');
-  const cx     = canvas.width  / 2;
-  const cy     = canvas.height / 2;
+  const cx = canvas.width / 2, cy = canvas.height / 2;
   const raio   = cx - 4;
   const total  = premios.length;
-
-  if (total === 0) return;
+  if (!total) return;
 
   const arcSize = (2 * Math.PI) / total;
   ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -500,115 +303,55 @@ function desenharRoleta(angulo) {
     const inicio = angulo + i * arcSize - Math.PI / 2;
     const fim    = inicio + arcSize;
 
-    // Fatia colorida
-    ctx.beginPath();
-    ctx.moveTo(cx, cy);
-    ctx.arc(cx, cy, raio, inicio, fim);
-    ctx.closePath();
-    ctx.fillStyle = CORES[i % CORES.length];
-    ctx.fill();
-    ctx.strokeStyle = 'rgba(255,255,255,0.7)';
-    ctx.lineWidth = 2;
-    ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(cx, cy); ctx.arc(cx, cy, raio, inicio, fim); ctx.closePath();
+    ctx.fillStyle = CORES[i % CORES.length]; ctx.fill();
+    ctx.strokeStyle = 'rgba(255,255,255,0.7)'; ctx.lineWidth = 2; ctx.stroke();
 
-    // Texto + emoji
-    ctx.save();
-    ctx.translate(cx, cy);
-    ctx.rotate(inicio + arcSize / 2);
-
-    const emoji    = premios[i].emoji || '🎁';
-    const nome     = premios[i].nome  || '';
-    const maxChar  = 13;
-    const label    = nome.length > maxChar ? nome.substring(0, maxChar) + '…' : nome;
-    const textX    = raio - 12;
-
-    ctx.textAlign    = 'right';
-    ctx.fillStyle    = 'white';
-    ctx.shadowColor  = 'rgba(0,0,0,0.5)';
-    ctx.shadowBlur   = 3;
-    ctx.font         = 'bold 13px Nunito, sans-serif';
-    ctx.fillText(label, textX, 5);
-
-    ctx.font         = '16px serif';
-    ctx.shadowBlur   = 2;
-    ctx.fillText(emoji, textX - ctx.measureText(label).width - 4, 6);
-
+    ctx.save(); ctx.translate(cx, cy); ctx.rotate(inicio + arcSize / 2);
+    const emoji = premios[i].emoji || '🎁';
+    const label = (premios[i].nome || '').substring(0, 13) + ((premios[i].nome || '').length > 13 ? '…' : '');
+    const tx    = raio - 12;
+    ctx.textAlign = 'right'; ctx.fillStyle = 'white';
+    ctx.shadowColor = 'rgba(0,0,0,0.5)'; ctx.shadowBlur = 3;
+    ctx.font = 'bold 13px Nunito, sans-serif'; ctx.fillText(label, tx, 5);
+    ctx.font = '16px serif'; ctx.shadowBlur = 2;
+    ctx.fillText(emoji, tx - ctx.measureText(label).width - 4, 6);
     ctx.restore();
   }
 
-  // Centro branco
-  ctx.beginPath();
-  ctx.arc(cx, cy, 28, 0, 2 * Math.PI);
-  ctx.fillStyle = 'white';
-  ctx.fill();
+  ctx.beginPath(); ctx.arc(cx, cy, 28, 0, 2 * Math.PI);
+  ctx.fillStyle = 'white'; ctx.fill();
 }
 
 function girarRoleta() {
-  if (isSpinning) return;
-  if (senhaJaUsada) {
-    alert('Esta senha já foi utilizada para girar a roleta.');
-    return;
-  }
-  if (premios.length === 0) {
-    alert('Nenhum prêmio carregado. Verifique a aba "premios" no Sheets.');
-    return;
-  }
-
-  // Bloqueia imediatamente — não permite segundo giro
-  senhaJaUsada = true;
+  if (isSpinning || jaGirou) return;
+  jaGirou    = true;
   isSpinning = true;
   document.getElementById('btn-spin').disabled = true;
 
-  // Sorteia prêmio pelo peso
-  const premioCerto    = sortearPremio();
-  const indexGanhador  = premios.findIndex(p => p.nome === premioCerto.nome);
-  const total          = premios.length;
-  const arcSize        = (2 * Math.PI) / total;
-
-  // Ângulo onde a seta (topo = -PI/2) deve apontar pro centro do segmento ganhador
-  const anguloSegmento = indexGanhador * arcSize + arcSize / 2;
-  // Roleta gira clockwise: precisamos rotacionar pra que anguloSegmento fique em -PI/2 (topo)
-  const anguloDestino  = -anguloSegmento - Math.PI / 2;
-
-  // Adiciona N voltas completas pra ficar bonito
-  const voltas         = 6 + Math.floor(Math.random() * 4); // 6-9 voltas
-  const anguloFinal    = anguloDestino + voltas * 2 * Math.PI;
-
-  const duracao    = 4500 + Math.random() * 1000;
-  const tInicio    = performance.now();
-  const aInicio    = anguloAtual;
+  const premioCerto   = sortearPremio();
+  const idx           = premios.findIndex(p => p.nome === premioCerto.nome);
+  const arcSize       = (2 * Math.PI) / premios.length;
+  const anguloFinal   = (-idx * arcSize - arcSize / 2 - Math.PI / 2) + (6 + Math.floor(Math.random() * 4)) * 2 * Math.PI;
+  const duracao       = 4500 + Math.random() * 1000;
+  const tInicio       = performance.now();
+  const aInicio       = anguloAtual;
 
   function animar(agora) {
-    const elapsed = agora - tInicio;
-    const t       = Math.min(elapsed / duracao, 1);
-    const ease    = easeOutQuart(t);
-    const angulo  = aInicio + (anguloFinal - aInicio) * ease;
-
-    anguloAtual = angulo;
-    desenharRoleta(angulo);
-
-    if (t < 1) {
-      requestAnimationFrame(animar);
-    } else {
-      isSpinning = false;
-      setTimeout(() => mostrarResultado(premioCerto), 700);
-    }
+    const t      = Math.min((agora - tInicio) / duracao, 1);
+    const ease   = 1 - Math.pow(1 - t, 4);
+    anguloAtual  = aInicio + (anguloFinal - aInicio) * ease;
+    desenharRoleta(anguloAtual);
+    if (t < 1) { requestAnimationFrame(animar); }
+    else { isSpinning = false; setTimeout(() => mostrarResultado(premioCerto), 700); }
   }
-
   requestAnimationFrame(animar);
 }
 
-function easeOutQuart(t) {
-  return 1 - Math.pow(1 - t, 4);
-}
-
 function sortearPremio() {
-  const totalPeso = premios.reduce((s, p) => s + (Number(p.probabilidade) || 1), 0);
-  let rand = Math.random() * totalPeso;
-  for (const p of premios) {
-    rand -= (Number(p.probabilidade) || 1);
-    if (rand <= 0) return p;
-  }
+  const total = premios.reduce((s, p) => s + (Number(p.probabilidade) || 1), 0);
+  let rand = Math.random() * total;
+  for (const p of premios) { rand -= (Number(p.probabilidade) || 1); if (rand <= 0) return p; }
   return premios[premios.length - 1];
 }
 
@@ -618,31 +361,26 @@ function sortearPremio() {
 async function mostrarResultado(premio) {
   const codigo  = gerarCodigo();
   const agora   = new Date();
-  const dataStr = agora.toLocaleDateString('pt-BR') + ' ' +
-                  agora.toLocaleTimeString('pt-BR', { hour:'2-digit', minute:'2-digit' });
+  const dataStr = agora.toLocaleDateString('pt-BR') + ' ' + agora.toLocaleTimeString('pt-BR', {hour:'2-digit',minute:'2-digit'});
 
-  // Registra no Sheets com todos os dados
-  if (APPS_SCRIPT_URL !== 'https://script.google.com/macros/s/AKfycbwdXzKRG0Eg8bCmmeKbgA8Bl-ktHe4icYa8BQYiPr4sza9PP4w-vTewQsPTPnZQEaEY/exec') {
-    try {
-      const url = `${APPS_SCRIPT_URL}?acao=registrar`
-        + `&senha=${encodeURIComponent(senhaAtual)}`
-        + `&nome=${encodeURIComponent(nomeAtual)}`
-        + `&loja=${encodeURIComponent(lojaAtual)}`
-        + `&pix=${encodeURIComponent(pixAtual)}`
-        + `&premio=${encodeURIComponent(premio.nome)}`
-        + `&codigo=${encodeURIComponent(codigo)}`;
-      jsonp(url).catch(() => {});
-    } catch(e) {}
-  }
-
-  resultadoAtual = { premio, codigo, data: dataStr, nome: nomeAtual, loja: lojaAtual, pix: pixAtual };
+  try {
+    const url = APPS_SCRIPT_URL
+      + '?acao=registrar'
+      + '&senha=' + encodeURIComponent(senhaAtual)
+      + '&nome='  + encodeURIComponent(nomeAtual)
+      + '&loja='  + encodeURIComponent(lojaAtual)
+      + '&pix='   + encodeURIComponent(pixAtual)
+      + '&premio='+ encodeURIComponent(premio.nome)
+      + '&codigo='+ encodeURIComponent(codigo);
+    jsonp(url).catch(() => {});
+  } catch(e) {}
 
   document.getElementById('res-emoji').textContent    = premio.emoji || '🎉';
   document.getElementById('res-premio').textContent   = premio.nome;
   document.getElementById('res-vendedor').textContent = nomeAtual;
-  document.getElementById('res-data').textContent     = dataStr;
   document.getElementById('res-loja').textContent     = lojaAtual;
   document.getElementById('res-pix').textContent      = pixAtual;
+  document.getElementById('res-data').textContent     = dataStr;
   document.getElementById('res-codigo').textContent   = codigo;
 
   mostrarTela('screen-resultado');
@@ -651,9 +389,9 @@ async function mostrarResultado(premio) {
 
 function gerarCodigo() {
   const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
-  let cod = 'KB-';
-  for (let i = 0; i < 6; i++) cod += chars[Math.floor(Math.random() * chars.length)];
-  return cod;
+  let c = 'KB-';
+  for (let i = 0; i < 6; i++) c += chars[Math.floor(Math.random() * chars.length)];
+  return c;
 }
 
 function lancarConfetti() {
@@ -671,150 +409,6 @@ function lancarConfetti() {
       setTimeout(() => el.remove(), 4000);
     }, i * 35);
   }
-}
-
-// ================================================================
-// GERAR CUPOM (IMAGEM)
-// ================================================================
-async function gerarCupom() {
-  const btn = document.querySelector('.btn-cupom');
-  btn.innerHTML = '<span class="loading"></span>Gerando...';
-  btn.disabled  = true;
-
-  const canvas = document.getElementById('cupom-canvas');
-  canvas.style.display = 'block';
-  const ctx = canvas.getContext('2d');
-  const W = 800, H = 1000;
-
-  // Fundo
-  const grad = ctx.createLinearGradient(0, 0, 0, H);
-  grad.addColorStop(0,   '#F4721B');
-  grad.addColorStop(0.5, '#C45A0E');
-  grad.addColorStop(1,   '#6B3A1F');
-  ctx.fillStyle = grad;
-  ctx.fillRect(0, 0, W, H);
-
-  // Bolinhas decorativas
-  ctx.fillStyle = 'rgba(255,255,255,0.05)';
-  for (let x = 0; x < W; x += 40)
-    for (let y = 0; y < H; y += 40) {
-      ctx.beginPath(); ctx.arc(x, y, 14, 0, 2*Math.PI); ctx.fill();
-    }
-
-  // Cabeçalho
-  ctx.textAlign = 'center';
-  ctx.fillStyle = 'white';
-  ctx.font = 'bold 28px Nunito, sans-serif';
-  ctx.fillText('GRUPO KUHN', W/2, 75);
-  ctx.font = 'bold 52px Fredoka One, cursive';
-  ctx.fillText('Roleta da Páscoa 🐣', W/2, 140);
-  ctx.font = '22px Nunito, sans-serif';
-  ctx.fillStyle = 'rgba(255,255,255,0.75)';
-  ctx.fillText('Chilli Beans', W/2, 178);
-
-  // Card branco
-  const cX = 40, cY = 210, cW = W-80, cH = 620;
-  ctx.fillStyle = 'white';
-  rrect(ctx, cX, cY, cW, cH, 32); ctx.fill();
-
-  // Emoji
-  ctx.font = '80px serif';
-  ctx.fillText(resultadoAtual.premio.emoji || '🎉', W/2, cY + 110);
-
-  // "Parabéns"
-  ctx.fillStyle = '#8B6347';
-  ctx.font = 'bold 24px Nunito, sans-serif';
-  ctx.fillText('🎊 PARABÉNS, VOCÊ GANHOU:', W/2, cY + 162);
-
-  // Nome do prêmio
-  ctx.fillStyle = '#F4721B';
-  ctx.font = 'bold 50px Fredoka One, cursive';
-  wrapText(ctx, resultadoAtual.premio.nome, W/2, cY + 232, cW - 60, 56);
-
-  // Divisória
-  ctx.strokeStyle = '#F0E0D0';
-  ctx.setLineDash([8,6]); ctx.lineWidth = 2;
-  ctx.beginPath();
-  ctx.moveTo(cX+40, cY+330); ctx.lineTo(cX+cW-40, cY+330);
-  ctx.stroke(); ctx.setLineDash([]);
-
-  // Info vendedor / data
-  const c1 = cX + 50, c2 = cX + cW/2, rY = cY + 390;
-  ctx.textAlign = 'left'; ctx.fillStyle = '#BBB';
-  ctx.font = 'bold 16px Nunito, sans-serif';
-  ctx.fillText('VENDEDOR', c1, rY - 20);
-  ctx.fillText('DATA',     c2, rY - 20);
-  ctx.fillStyle = '#3A2010'; ctx.font = 'bold 22px Nunito, sans-serif';
-  ctx.fillText(resultadoAtual.nome, c1, rY + 8);
-  ctx.fillText(resultadoAtual.data, c2, rY + 8);
-
-  // Box código
-  ctx.fillStyle = '#FFF8EE';
-  rrect(ctx, cX+40, cY+440, cW-80, 105, 16); ctx.fill();
-  ctx.strokeStyle = '#F4721B'; ctx.setLineDash([8,6]); ctx.lineWidth = 3;
-  rrect(ctx, cX+40, cY+440, cW-80, 105, 16); ctx.stroke(); ctx.setLineDash([]);
-
-  ctx.textAlign = 'center';
-  ctx.fillStyle = '#AAA'; ctx.font = 'bold 16px Nunito, sans-serif';
-  ctx.fillText('CÓDIGO DO CUPOM', W/2, cY + 478);
-  ctx.fillStyle = '#F4721B'; ctx.font = 'bold 46px Fredoka One, cursive';
-  ctx.fillText(resultadoAtual.codigo, W/2, cY + 530);
-
-  ctx.fillStyle = '#CCC'; ctx.font = '17px Nunito, sans-serif';
-  ctx.fillText('Válido nesta data • Apresente ao gerente para resgatar', W/2, cY + 580);
-
-  // Rodapé
-  ctx.fillStyle = 'rgba(255,255,255,0.55)';
-  ctx.font = '19px Nunito, sans-serif';
-  ctx.fillText('Chilli Beans • Grupo Kuhn  •  Páscoa 2025', W/2, H - 28);
-
-  const dataURL = canvas.toDataURL('image/png');
-  canvas.style.display = 'none';
-
-  // Tenta Web Share API (mobile nativo)
-  if (navigator.share) {
-    try {
-      const blob = await (await fetch(dataURL)).blob();
-      const file = new File([blob], 'cupom-pascoa.png', { type:'image/png' });
-      if (navigator.canShare && navigator.canShare({ files:[file] })) {
-        await navigator.share({ files:[file], title:'Meu prêmio da Páscoa - Grupo Kuhn' });
-        btn.innerHTML = '✅ Compartilhado!';
-        btn.disabled  = false;
-        return;
-      }
-    } catch(e) {}
-  }
-
-  // Fallback: download direto
-  const a = document.createElement('a');
-  a.href     = dataURL;
-  a.download = 'cupom-pascoa-kuhn.png';
-  a.click();
-  btn.innerHTML = '✅ Imagem baixada!';
-  btn.disabled  = false;
-}
-
-function rrect(ctx, x, y, w, h, r) {
-  ctx.beginPath();
-  ctx.moveTo(x+r, y);
-  ctx.lineTo(x+w-r, y); ctx.quadraticCurveTo(x+w, y,   x+w, y+r);
-  ctx.lineTo(x+w, y+h-r); ctx.quadraticCurveTo(x+w, y+h, x+w-r, y+h);
-  ctx.lineTo(x+r, y+h); ctx.quadraticCurveTo(x, y+h,   x, y+h-r);
-  ctx.lineTo(x, y+r); ctx.quadraticCurveTo(x, y,     x+r, y);
-  ctx.closePath();
-}
-
-function wrapText(ctx, text, x, y, maxW, lineH) {
-  const words = text.split(' ');
-  let line = '', lines = [];
-  for (const w of words) {
-    const test = line + w + ' ';
-    if (ctx.measureText(test).width > maxW && line) { lines.push(line.trim()); line = w + ' '; }
-    else line = test;
-  }
-  lines.push(line.trim());
-  const startY = y - ((lines.length - 1) * lineH) / 2;
-  lines.forEach((l, i) => ctx.fillText(l, x, startY + i * lineH));
 }
 </script>
 </body>
