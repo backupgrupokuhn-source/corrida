@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Roleta da Páscoa Grupo Kuhn</title>
+<title>Roleta da Páscoa - Grupo Kuhn</title>
 <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -230,7 +230,7 @@ input[type="text"]::placeholder { color:#CCC; font-weight:400; }
       <div class="logo-text">GRUPO</div>
       <div class="logo-grupo">KUHN</div>
     </div>
-    <div class="title-pascoa">Roleta da <span>Páscoa</span> 🐣</div>
+    <div class="title-pascoa">Roleta da <span>Páscoa</span> </div>
     <div class="subtitle">Gire e ganhe um prêmio especial!</div>
   </div>
 
@@ -238,14 +238,14 @@ input[type="text"]::placeholder { color:#CCC; font-weight:400; }
   <div id="screen-login" class="screen active">
     <div class="card">
       <div class="card-title">✨ Seu presente te espera</div>
-      <div class="card-sub">Preencha os dados para liberar a roleta</div>
+      <div class="card-sub">Preencha os dados</div>
       <div class="field-group">
         <label>👤 Seu nome</label>
         <input type="text" id="input-nome" placeholder="Como você se chama?" autocomplete="off">
       </div>
       <div class="field-group">
         <label>🔑 Senha da campanha</label>
-        <input type="text" id="input-senha" placeholder="Ex: COELHO-847" autocomplete="off">
+        <input type="text" id="input-senha" placeholder="Peça no capitães" autocomplete="off">
       </div>
       <button class="btn-primary" id="btn-entrar" onclick="validarAcesso()">
         🐰 Liberar!
@@ -314,7 +314,7 @@ input[type="text"]::placeholder { color:#CCC; font-weight:400; }
 // ================================================================
 // ⚙️ COLE AQUI A URL DO SEU APPS SCRIPT
 // ================================================================
-const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwdXzKRG0Eg8bCmmeKbgA8Bl-ktHe4icYa8BQYiPr4sza9PP4w-vTewQsPTPnZQEaEY/exec';
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/library/d/1AxGXHjVN5OFH9Tvz2i3P1U2lFSyC3sxJpdEWBSNJYrBWtJmCinqu47gQ/2';
 
 // ================================================================
 // ESTADO
@@ -352,6 +352,36 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
+// ================================================================
+// JSONP — único jeito de chamar Apps Script de página estática
+// ================================================================
+function jsonp(url, callback) {
+  return new Promise((resolve, reject) => {
+    const cbName = '__cb_' + Date.now();
+    const timeout = setTimeout(() => {
+      delete window[cbName];
+      if (script.parentNode) script.parentNode.removeChild(script);
+      reject(new Error('timeout'));
+    }, 10000);
+
+    window[cbName] = (data) => {
+      clearTimeout(timeout);
+      delete window[cbName];
+      if (script.parentNode) script.parentNode.removeChild(script);
+      resolve(data);
+    };
+
+    const script = document.createElement('script');
+    script.src = url + '&callback=' + cbName;
+    script.onerror = () => {
+      clearTimeout(timeout);
+      delete window[cbName];
+      reject(new Error('script error'));
+    };
+    document.head.appendChild(script);
+  });
+}
+
 async function validarAcesso() {
   const nome  = document.getElementById('input-nome').value.trim();
   const senha = document.getElementById('input-senha').value.trim().toUpperCase();
@@ -366,35 +396,31 @@ async function validarAcesso() {
   btn.innerHTML = '<span class="loading"></span>Verificando...';
   btn.disabled  = true;
 
-  // Se URL não foi configurada, entra em modo demo
-  if (APPS_SCRIPT_URL === 'https://script.google.com/macros/s/AKfycbwdXzKRG0Eg8bCmmeKbgA8Bl-ktHe4icYa8BQYiPr4sza9PP4w-vTewQsPTPnZQEaEY/exec') {
-    premios = getPremiosDemo();
+  // Modo demo se URL não configurada
+  if (APPS_SCRIPT_URL === 'https://script.google.com/macros/library/d/1AxGXHjVN5OFH9Tvz2i3P1U2lFSyC3sxJpdEWBSNJYrBWtJmCinqu47gQ/2') {
+    premios   = getPremiosDemo();
     nomeAtual = nome;
     senhaAtual = senha;
     irParaRoleta();
-    btn.innerHTML = '🐰 Liberar!';
+    btn.innerHTML = '🐰 Liberar minha Roleta!';
     btn.disabled  = false;
     return;
   }
 
   try {
     const url  = `${APPS_SCRIPT_URL}?acao=validar&senha=${encodeURIComponent(senha)}&nome=${encodeURIComponent(nome)}`;
-    const resp = await fetch(url, { redirect: 'follow' });
-
-    if (!resp.ok) throw new Error('HTTP ' + resp.status);
-
-    const data = await resp.json();
+    const data = await jsonp(url);
 
     if (data.ok) {
-      nomeAtual = nome;
+      nomeAtual  = nome;
       senhaAtual = senha;
-      premios   = data.premios;
+      premios    = data.premios;
       irParaRoleta();
     } else {
       mostrarErro(data.mensagem || 'Senha inválida ou já utilizada.');
     }
   } catch (e) {
-    mostrarErro('Erro ao conectar. Verifique se o Web App está publicado como "Qualquer pessoa".');
+    mostrarErro('Erro ao conectar. Verifique a URL do Web App.');
     console.error(e);
   }
 
@@ -565,14 +591,14 @@ async function mostrarResultado(premio) {
                   agora.toLocaleTimeString('pt-BR', { hour:'2-digit', minute:'2-digit' });
 
   // Registra no Sheets (não bloqueia a UI)
-  if (APPS_SCRIPT_URL !== 'https://script.google.com/macros/s/AKfycbwdXzKRG0Eg8bCmmeKbgA8Bl-ktHe4icYa8BQYiPr4sza9PP4w-vTewQsPTPnZQEaEY/exec') {
+  if (APPS_SCRIPT_URL !== 'https://script.google.com/macros/library/d/1AxGXHjVN5OFH9Tvz2i3P1U2lFSyC3sxJpdEWBSNJYrBWtJmCinqu47gQ/2') {
     try {
       const url = `${APPS_SCRIPT_URL}?acao=registrar`
         + `&senha=${encodeURIComponent(senhaAtual)}`
         + `&nome=${encodeURIComponent(nomeAtual)}`
         + `&premio=${encodeURIComponent(premio.nome)}`
         + `&codigo=${encodeURIComponent(codigo)}`;
-      fetch(url, { redirect: 'follow' }).catch(() => {});
+      jsonp(url).catch(() => {});
     } catch(e) {}
   }
 
@@ -646,7 +672,7 @@ async function gerarCupom() {
   ctx.font = 'bold 28px Nunito, sans-serif';
   ctx.fillText('GRUPO KUHN', W/2, 75);
   ctx.font = 'bold 52px Fredoka One, cursive';
-  ctx.fillText('Roleta da Páscoa 🐣', W/2, 140);
+  ctx.fillText('Roleta da Páscoa', W/2, 140);
   ctx.font = '22px Nunito, sans-serif';
   ctx.fillStyle = 'rgba(255,255,255,0.75)';
   ctx.fillText('Chilli Beans', W/2, 178);
