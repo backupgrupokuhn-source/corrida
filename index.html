@@ -7,356 +7,328 @@
 <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
 <style>
 :root {
-  --verde:     #00C853;
-  --verde-esc: #00952E;
   --rosa:      #FF4081;
-  --rosa-esc:  #C2185B;
+  --verde:     #00C853;
   --azul:      #40C4FF;
-  --preto:     #1A1A2E;
-  --branco:    #FFFFFF;
-  --cinza-bg:  #F0F4FF;
+  --preto:     #111122;
+  --card-bg:   rgba(255,255,255,0.07);
+  --border:    rgba(255,255,255,0.12);
 }
-
 * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
-
 body {
   font-family: 'Nunito', sans-serif;
   background: var(--preto);
   min-height: 100vh;
   overflow-x: hidden;
 }
-
-/* FUNDO COM PADRÃO DE BOLINHAS CARTOON */
 body::before {
-  content: '';
-  position: fixed; inset: 0;
+  content:''; position:fixed; inset:0; z-index:0;
   background:
-    radial-gradient(circle at 15% 20%, rgba(0,200,83,.15) 0%, transparent 40%),
-    radial-gradient(circle at 85% 80%, rgba(255,64,129,.15) 0%, transparent 40%),
-    radial-gradient(circle at 50% 50%, rgba(64,196,255,.08) 0%, transparent 60%),
+    radial-gradient(ellipse at 10% 0%,   rgba(255,64,129,.18) 0%, transparent 45%),
+    radial-gradient(ellipse at 90% 5%,   rgba(0,200,83,.15)   0%, transparent 45%),
+    radial-gradient(ellipse at 50% 100%, rgba(64,196,255,.12) 0%, transparent 50%),
     var(--preto);
-  z-index: 0;
 }
 
-/* ESTRELINHAS FLUTUANDO */
-.star-deco {
-  position: fixed;
-  pointer-events: none;
-  z-index: 0;
-  animation: floatStar 5s ease-in-out infinite;
-  opacity: 0.25;
-  font-size: 1.5rem;
-}
-.star-deco:nth-child(1){top:8%;left:6%;animation-delay:0s}
-.star-deco:nth-child(2){top:20%;right:7%;animation-delay:.8s;font-size:1.1rem}
-.star-deco:nth-child(3){top:55%;left:4%;animation-delay:1.6s;font-size:2rem}
-.star-deco:nth-child(4){top:65%;right:6%;animation-delay:.4s;font-size:1.3rem}
-.star-deco:nth-child(5){bottom:15%;left:12%;animation-delay:2s;font-size:1.8rem}
-.star-deco:nth-child(6){bottom:8%;right:15%;animation-delay:1.2s;font-size:1rem}
+/* ── PARTÍCULAS FLUTUANDO ── */
+.p { position:fixed; pointer-events:none; z-index:0; animation:fp 7s ease-in-out infinite; opacity:.2; font-size:1.2rem; }
+.p:nth-child(1){top:6%;left:5%;animation-delay:0s}
+.p:nth-child(2){top:18%;right:6%;animation-delay:1s;font-size:.9rem}
+.p:nth-child(3){top:50%;left:3%;animation-delay:2.2s;font-size:1.5rem}
+.p:nth-child(4){top:62%;right:4%;animation-delay:.6s;font-size:1rem}
+.p:nth-child(5){bottom:18%;left:10%;animation-delay:1.8s;font-size:1.3rem}
+.p:nth-child(6){bottom:6%;right:12%;animation-delay:3s;font-size:.8rem}
+@keyframes fp { 0%,100%{transform:translateY(0) rotate(0deg)} 50%{transform:translateY(-14px) rotate(25deg)} }
 
-@keyframes floatStar {
-  0%,100%{ transform: translateY(0) rotate(0deg); }
-  50%{ transform: translateY(-12px) rotate(20deg); }
-}
-
-.container {
-  position: relative; z-index: 1;
-  max-width: 480px; margin: 0 auto;
-  padding: 20px 16px 40px;
-  min-height: 100vh;
-}
+.wrap { position:relative; z-index:1; max-width:480px; margin:0 auto; padding:16px 16px 48px; }
 
 /* ── HEADER ── */
-.header {
-  text-align: center;
-  margin-bottom: 24px;
-  animation: slideDown .6s ease;
-}
-@keyframes slideDown {
-  from{ opacity:0; transform:translateY(-30px); }
-  to{ opacity:1; transform:translateY(0); }
+.header { text-align:center; margin-bottom:20px; animation:sd .6s ease; }
+@keyframes sd { from{opacity:0;transform:translateY(-28px)} to{opacity:1;transform:translateY(0)} }
+
+/* PERSONAGENS SVG */
+.ppg-chars {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 8px;
+  margin-bottom: 10px;
 }
 
-.logo-area {
+.logo-strip {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  background: linear-gradient(135deg, var(--verde), var(--verde-esc));
-  border-radius: 20px;
-  padding: 12px 20px;
-  box-shadow: 0 0 0 3px rgba(0,200,83,.3), 0 8px 24px rgba(0,200,83,.4);
-  margin-bottom: 14px;
+  background: linear-gradient(135deg, rgba(255,64,129,.3), rgba(0,200,83,.3));
+  border: 1.5px solid rgba(255,255,255,.15);
+  border-radius: 16px;
+  padding: 10px 18px;
+  margin-bottom: 10px;
+  backdrop-filter: blur(8px);
 }
-.logo-text-wrap { text-align: left; }
-.logo-small { font-family:'Fredoka One',cursive; font-size:.85rem; color:rgba(255,255,255,.8); letter-spacing:2px; }
-.logo-big   { font-family:'Fredoka One',cursive; font-size:1.9rem; color:white; line-height:1; }
-
-/* Ícone PPG estilizado com SVG inline */
-.ppg-icon { font-size:2.2rem; filter: drop-shadow(0 2px 4px rgba(0,0,0,.4)); }
+.logo-small { font-family:'Fredoka One',cursive; font-size:.8rem; color:rgba(255,255,255,.6); letter-spacing:2px; }
+.logo-big   { font-family:'Fredoka One',cursive; font-size:1.7rem; color:white; line-height:1; }
 
 .title-main {
   font-family: 'Fredoka One', cursive;
-  font-size: 2.4rem;
+  font-size: 2.2rem;
   color: white;
   line-height: 1;
-  text-shadow: 3px 3px 0 var(--rosa), 6px 6px 0 rgba(255,64,129,.3);
+  text-shadow: 3px 3px 0 var(--rosa);
 }
-.title-main span { color: var(--verde); text-shadow: 3px 3px 0 #005C25, 6px 6px 0 rgba(0,200,83,.3); }
-.subtitle {
-  font-size: .9rem;
-  color: rgba(255,255,255,.6);
-  margin-top: 6px;
-  font-weight: 700;
-  letter-spacing: .5px;
-}
+.title-main span { color: var(--verde); text-shadow: 3px 3px 0 #005C25; }
+.subtitle { font-size:.85rem; color:rgba(255,255,255,.5); margin-top:6px; font-weight:700; }
 
 /* ── CARD ── */
 .card {
-  background: rgba(255,255,255,.06);
-  backdrop-filter: blur(12px);
-  border-radius: 24px;
-  padding: 28px 24px;
-  border: 2px solid rgba(0,200,83,.3);
-  box-shadow: 0 8px 32px rgba(0,0,0,.4), inset 0 1px 0 rgba(255,255,255,.1);
+  background: var(--card-bg);
+  backdrop-filter: blur(10px);
+  border-radius: 22px;
+  padding: 26px 22px;
+  border: 1.5px solid var(--border);
+  box-shadow: 0 8px 32px rgba(0,0,0,.5);
 }
-.card-title {
-  font-family: 'Fredoka One', cursive;
-  font-size: 1.4rem;
-  color: var(--verde);
-  text-align: center;
-  margin-bottom: 4px;
-  text-shadow: 0 0 20px rgba(0,200,83,.5);
-}
-.card-sub { font-size:.85rem; color:rgba(255,255,255,.5); text-align:center; margin-bottom:20px; }
+.card-title { font-family:'Fredoka One',cursive; font-size:1.3rem; color:var(--verde); text-align:center; margin-bottom:4px; }
+.card-sub   { font-size:.82rem; color:rgba(255,255,255,.45); text-align:center; margin-bottom:18px; }
 
-.field-group { margin-bottom:14px; }
-label {
-  display: block;
-  font-size: .75rem;
-  font-weight: 900;
-  color: rgba(255,255,255,.7);
-  margin-bottom: 6px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
+.fg { margin-bottom:13px; }
+label { display:block; font-size:.72rem; font-weight:900; color:rgba(255,255,255,.6); margin-bottom:5px; text-transform:uppercase; letter-spacing:1px; }
 input[type="text"] {
-  width: 100%;
-  padding: 13px 16px;
-  border: 2px solid rgba(0,200,83,.25);
-  border-radius: 14px;
-  font-size: 1rem;
-  font-family: 'Nunito', sans-serif;
-  font-weight: 700;
-  color: white;
-  background: rgba(255,255,255,.08);
-  outline: none;
-  transition: all .2s;
-}
-input[type="text"]:focus {
-  border-color: var(--verde);
-  background: rgba(0,200,83,.1);
-  box-shadow: 0 0 0 4px rgba(0,200,83,.15);
-}
-input[type="text"]::placeholder { color:rgba(255,255,255,.25); font-weight:400; }
-
-.btn-primary {
-  width: 100%;
-  padding: 16px;
-  background: linear-gradient(135deg, var(--verde), var(--verde-esc));
-  color: white;
-  border: none;
-  border-radius: 16px;
-  font-family: 'Fredoka One', cursive;
-  font-size: 1.3rem;
-  cursor: pointer;
-  box-shadow: 0 6px 20px rgba(0,200,83,.5), 0 0 0 3px rgba(0,200,83,.2);
-  transition: all .2s;
-  margin-top: 8px;
-  letter-spacing: .5px;
-}
-.btn-primary:active { transform: scale(.97); }
-.btn-primary:disabled { background: #444; box-shadow: none; cursor: not-allowed; color: #888; }
-
-.error-msg {
-  background: rgba(255,64,129,.15);
-  border: 1px solid var(--rosa);
+  width:100%; padding:13px 15px;
+  border: 1.5px solid rgba(255,255,255,.12);
   border-radius: 12px;
-  padding: 12px 16px;
-  color: #FF80AB;
-  font-size: .9rem;
-  font-weight: 700;
-  text-align: center;
-  margin-top: 12px;
-  animation: shake .4s ease;
+  font-size: 1rem; font-family:'Nunito',sans-serif; font-weight:700;
+  color: white; background: rgba(255,255,255,.07);
+  outline: none; transition: all .2s;
 }
-@keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-8px)} 75%{transform:translateX(8px)} }
+input[type="text"]:focus { border-color:var(--verde); background:rgba(0,200,83,.1); box-shadow:0 0 0 3px rgba(0,200,83,.15); }
+input[type="text"]::placeholder { color:rgba(255,255,255,.2); font-weight:400; }
+
+.btn-ok {
+  width:100%; padding:15px;
+  background: linear-gradient(135deg, var(--verde), #00952E);
+  color: white; border: none; border-radius:14px;
+  font-family:'Fredoka One',cursive; font-size:1.25rem;
+  cursor:pointer; box-shadow:0 6px 20px rgba(0,200,83,.45);
+  transition:all .2s; margin-top:6px;
+}
+.btn-ok:active { transform:scale(.97); }
+.btn-ok:disabled { background:#333; box-shadow:none; color:#666; cursor:not-allowed; }
+
+.err {
+  background:rgba(255,64,129,.15); border:1px solid var(--rosa);
+  border-radius:10px; padding:11px 14px; color:#FF80AB;
+  font-size:.88rem; font-weight:700; text-align:center;
+  margin-top:10px; animation:shake .4s ease;
+}
+@keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-7px)} 75%{transform:translateX(7px)} }
 
 /* ── TELAS ── */
-.screen { display: none; }
-.screen.active { display: block; animation: fadeIn .5s ease; }
-@keyframes fadeIn { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+.screen { display:none; }
+.screen.active { display:block; animation:fi .45s ease; }
+@keyframes fi { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:translateY(0)} }
 
-/* ── BADGE VENDEDOR ── */
-.vendedor-badge {
+/* ── BADGE ── */
+.badge {
   background: linear-gradient(135deg, rgba(0,200,83,.2), rgba(255,64,129,.2));
-  border: 2px solid rgba(0,200,83,.4);
-  border-radius: 50px;
-  padding: 10px 20px;
-  text-align: center;
-  margin-bottom: 20px;
-  box-shadow: 0 4px 14px rgba(0,0,0,.3);
+  border: 1.5px solid rgba(0,200,83,.35);
+  border-radius: 50px; padding:9px 18px; text-align:center;
+  margin-bottom:18px;
 }
-.vendedor-badge span { font-size:.75rem; color:rgba(255,255,255,.6); font-weight:800; text-transform:uppercase; letter-spacing:1px; }
-.vendedor-badge strong { display:block; font-family:'Fredoka One',cursive; font-size:1.4rem; color:var(--verde); line-height:1.1; text-shadow:0 0 16px rgba(0,200,83,.6); }
+.badge span { font-size:.72rem; color:rgba(255,255,255,.5); font-weight:800; text-transform:uppercase; letter-spacing:1px; }
+.badge strong { display:block; font-family:'Fredoka One',cursive; font-size:1.35rem; color:var(--verde); line-height:1.1; }
 
-/* ── ROLETA ── */
-.wheel-container {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 20px;
+/* ── ROLETA (sem seta) ── */
+.wheel-wrap {
+  display: flex; flex-direction:column; align-items:center; margin-bottom:18px;
 }
-.wheel-arrow {
-  position: absolute;
-  top: -16px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 10;
-  filter: drop-shadow(0 4px 8px rgba(0,0,0,.6));
-}
-.wheel-wrapper {
-  position: relative;
-  width: 320px; height: 320px;
-  border-radius: 50%;
+.wheel-ring {
+  position:relative; width:310px; height:310px; border-radius:50%;
   box-shadow:
     0 0 0 5px var(--preto),
-    0 0 0 8px var(--verde),
+    0 0 0 8px var(--rosa),
     0 0 0 11px var(--preto),
-    0 0 40px rgba(0,200,83,.5),
-    0 12px 40px rgba(0,0,0,.6);
+    0 0 30px rgba(255,64,129,.5),
+    0 10px 40px rgba(0,0,0,.7);
 }
-#wheel-canvas { width:320px; height:320px; border-radius:50%; display:block; }
-.wheel-center {
-  position: absolute; top:50%; left:50%; transform:translate(-50%,-50%);
-  width: 58px; height: 58px;
-  background: var(--preto);
-  border-radius: 50%;
-  border: 4px solid var(--verde);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 1.8rem;
-  box-shadow: 0 0 0 3px var(--preto), 0 0 20px rgba(0,200,83,.6);
-  z-index: 5;
+#wc { width:310px; height:310px; border-radius:50%; display:block; }
+.wheel-mid {
+  position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+  width:54px; height:54px; background:var(--preto); border-radius:50%;
+  border:3px solid var(--rosa);
+  display:flex; align-items:center; justify-content:center;
+  font-size:1.6rem; z-index:5;
+  box-shadow:0 0 0 3px var(--preto), 0 0 18px rgba(255,64,129,.6);
 }
 
 .btn-spin {
-  width: 100%;
-  padding: 18px;
-  background: linear-gradient(135deg, var(--rosa), var(--rosa-esc));
-  color: white;
-  border: none;
-  border-radius: 16px;
-  font-family: 'Fredoka One', cursive;
-  font-size: 1.5rem;
-  cursor: pointer;
-  box-shadow: 0 6px 20px rgba(255,64,129,.5), 0 0 0 3px rgba(255,64,129,.2);
-  transition: all .2s;
-  margin-top: 16px;
-  letter-spacing: .5px;
+  width:100%; padding:17px;
+  background: linear-gradient(135deg, var(--rosa), #C2185B);
+  color:white; border:none; border-radius:14px;
+  font-family:'Fredoka One',cursive; font-size:1.45rem;
+  cursor:pointer; box-shadow:0 6px 20px rgba(255,64,129,.5);
+  transition:all .2s; margin-top:14px; letter-spacing:.5px;
 }
-.btn-spin:active { transform: scale(.97); }
-.btn-spin:disabled { background: #333; color: #666; box-shadow: none; cursor: not-allowed; }
+.btn-spin:active { transform:scale(.97); }
+.btn-spin:disabled { background:#333; color:#555; box-shadow:none; cursor:not-allowed; }
 
 /* ── RESULTADO ── */
-.resultado-card {
-  background: rgba(255,255,255,.06);
-  backdrop-filter: blur(12px);
-  border-radius: 24px;
-  overflow: hidden;
-  border: 2px solid rgba(0,200,83,.3);
-  box-shadow: 0 12px 40px rgba(0,0,0,.5);
-  margin-bottom: 16px;
+.res-card {
+  background: var(--card-bg); backdrop-filter:blur(10px);
+  border-radius:22px; overflow:hidden;
+  border:1.5px solid rgba(0,200,83,.3);
+  box-shadow:0 12px 40px rgba(0,0,0,.6); margin-bottom:14px;
 }
-.resultado-header {
-  background: linear-gradient(135deg, var(--verde-esc), var(--verde));
-  padding: 28px 20px;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
+.res-head {
+  background: linear-gradient(135deg, #005C25, var(--verde));
+  padding:26px 18px; text-align:center; position:relative; overflow:hidden;
 }
-.resultado-header::before {
-  content: '';
-  position: absolute; inset: 0;
-  background: radial-gradient(circle at 30% 50%, rgba(255,255,255,.15), transparent 60%);
+.res-head::before {
+  content:''; position:absolute; inset:0;
+  background:radial-gradient(circle at 30% 50%, rgba(255,255,255,.12), transparent 60%);
 }
-.resultado-emoji { font-size:3.5rem; display:block; margin-bottom:6px; animation:bounceIn .6s ease; }
-@keyframes bounceIn { 0%{transform:scale(0)} 60%{transform:scale(1.2)} 100%{transform:scale(1)} }
-.resultado-titulo { font-family:'Fredoka One',cursive; font-size:1.1rem; color:rgba(255,255,255,.85); }
-.resultado-premio { font-family:'Fredoka One',cursive; font-size:2rem; color:white; line-height:1.1; margin-top:4px; text-shadow:2px 2px 0 rgba(0,0,0,.3); }
+.res-emoji { font-size:3.2rem; display:block; margin-bottom:5px; animation:bi .6s ease; }
+@keyframes bi { 0%{transform:scale(0)} 60%{transform:scale(1.2)} 100%{transform:scale(1)} }
+.res-titulo { font-family:'Fredoka One',cursive; font-size:1rem; color:rgba(255,255,255,.8); }
+.res-premio { font-family:'Fredoka One',cursive; font-size:1.9rem; color:white; line-height:1.1; margin-top:3px; text-shadow:2px 2px 0 rgba(0,0,0,.3); }
+.res-body { padding:18px; }
+.info-row { display:flex; justify-content:space-between; align-items:center; padding:9px 0; border-bottom:1px solid rgba(255,255,255,.07); font-size:.88rem; }
+.info-row:last-child { border-bottom:none; }
+.il { color:rgba(255,255,255,.38); font-weight:800; text-transform:uppercase; font-size:.7rem; letter-spacing:.5px; }
+.iv { font-weight:800; color:white; text-align:right; max-width:65%; }
+.cod-box {
+  background:rgba(0,200,83,.08); border:1.5px dashed rgba(0,200,83,.45);
+  border-radius:12px; padding:13px; text-align:center; margin:14px 0 2px;
+}
+.cod-label { font-size:.7rem; font-weight:900; color:rgba(0,200,83,.7); text-transform:uppercase; letter-spacing:1px; }
+.cod-val { font-family:'Fredoka One',cursive; font-size:1.9rem; color:var(--verde); letter-spacing:3px; }
 
-.resultado-body { padding:20px; }
-.info-row {
-  display: flex; justify-content:space-between; align-items:center;
-  padding: 10px 0;
-  border-bottom: 1px solid rgba(255,255,255,.08);
-  font-size: .9rem;
-}
-.info-row:last-child { border-bottom: none; }
-.info-label { color:rgba(255,255,255,.4); font-weight:800; text-transform:uppercase; font-size:.72rem; letter-spacing:.5px; }
-.info-value { font-weight:800; color:white; text-align:right; max-width:65%; }
-
-.codigo-cupom {
-  background: rgba(0,200,83,.08);
-  border: 2px dashed rgba(0,200,83,.5);
-  border-radius: 14px;
-  padding: 14px;
-  text-align: center;
-  margin: 16px 0 4px;
-}
-.codigo-label { font-size:.72rem; font-weight:900; color:rgba(0,200,83,.7); text-transform:uppercase; letter-spacing:1px; }
-.codigo-valor { font-family:'Fredoka One',cursive; font-size:2rem; color:var(--verde); letter-spacing:3px; text-shadow:0 0 20px rgba(0,200,83,.5); }
-
-/* ── UTILS ── */
-.loading {
-  display: inline-block; width:18px; height:18px;
-  border: 3px solid rgba(255,255,255,.3); border-top-color:white;
-  border-radius: 50%; animation: spin .8s linear infinite;
-  vertical-align: middle; margin-right:8px;
-}
-@keyframes spin { to{ transform:rotate(360deg) } }
-
-.confetti-piece {
-  position: fixed; top:-10px; border-radius: 2px;
-  animation: confettiFall linear forwards;
-  pointer-events: none; z-index:999;
-}
-@keyframes confettiFall {
-  0%{ transform:translateY(0) rotate(0deg); opacity:1 }
-  100%{ transform:translateY(100vh) rotate(720deg); opacity:0 }
-}
+/* utils */
+.ld { display:inline-block; width:17px; height:17px; border:3px solid rgba(255,255,255,.25); border-top-color:white; border-radius:50%; animation:spin .8s linear infinite; vertical-align:middle; margin-right:7px; }
+@keyframes spin { to{transform:rotate(360deg)} }
+.cf { position:fixed; top:-10px; border-radius:2px; animation:cff linear forwards; pointer-events:none; z-index:999; }
+@keyframes cff { 0%{transform:translateY(0) rotate(0deg);opacity:1} 100%{transform:translateY(100vh) rotate(720deg);opacity:0} }
 </style>
 </head>
 <body>
 
-<!-- ESTRELAS DECORATIVAS -->
-<div class="star-deco">⚡</div>
-<div class="star-deco">✨</div>
-<div class="star-deco">💥</div>
-<div class="star-deco">⭐</div>
-<div class="star-deco">💫</div>
-<div class="star-deco">🌟</div>
+<div class="p">⚡</div>
+<div class="p">💫</div>
+<div class="p">✨</div>
+<div class="p">💥</div>
+<div class="p">⭐</div>
+<div class="p">🌟</div>
 
-<div class="container">
+<div class="wrap">
 
   <!-- HEADER -->
   <div class="header">
-    <div class="logo-area">
-      <div class="ppg-icon">👊</div>
-      <div class="logo-text-wrap">
+
+    <!-- PERSONAGENS PPG EM SVG -->
+    <div class="ppg-chars">
+
+      <!-- FLORZINHA (verde) -->
+      <svg width="72" height="96" viewBox="0 0 72 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Corpo -->
+        <ellipse cx="36" cy="68" rx="18" ry="22" fill="#00C853"/>
+        <!-- Bracinhos -->
+        <ellipse cx="14" cy="68" rx="7" ry="5" fill="#FFD180" transform="rotate(-20 14 68)"/>
+        <ellipse cx="58" cy="68" rx="7" ry="5" fill="#FFD180" transform="rotate(20 58 68)"/>
+        <!-- Pescoço -->
+        <rect x="30" y="44" width="12" height="8" rx="4" fill="#FFD180"/>
+        <!-- Cabeça -->
+        <ellipse cx="36" cy="36" rx="22" ry="22" fill="#FFD180"/>
+        <!-- Olhos grandes -->
+        <ellipse cx="27" cy="34" rx="8" ry="9" fill="white"/>
+        <ellipse cx="45" cy="34" rx="8" ry="9" fill="white"/>
+        <circle cx="28" cy="35" r="5" fill="#1A1A2E"/>
+        <circle cx="46" cy="35" r="5" fill="#1A1A2E"/>
+        <circle cx="30" cy="33" r="1.5" fill="white"/>
+        <circle cx="48" cy="33" r="1.5" fill="white"/>
+        <!-- Contorno olhos -->
+        <ellipse cx="27" cy="34" rx="8" ry="9" fill="none" stroke="#1A1A2E" stroke-width="1.5"/>
+        <ellipse cx="45" cy="34" rx="8" ry="9" fill="none" stroke="#1A1A2E" stroke-width="1.5"/>
+        <!-- Rabo de cavalo verde -->
+        <ellipse cx="58" cy="20" rx="5" ry="12" fill="#00C853" transform="rotate(15 58 20)"/>
+        <!-- Franja -->
+        <ellipse cx="36" cy="16" rx="22" ry="8" fill="#1A1A2E"/>
+        <!-- Perninha -->
+        <rect x="26" y="86" width="8" height="10" rx="4" fill="#FFD180"/>
+        <rect x="38" y="86" width="8" height="10" rx="4" fill="#FFD180"/>
+        <!-- Sapatinho -->
+        <ellipse cx="30" cy="95" rx="6" ry="3" fill="#00C853"/>
+        <ellipse cx="42" cy="95" rx="6" ry="3" fill="#00C853"/>
+        <!-- Contorno corpo -->
+        <ellipse cx="36" cy="68" rx="18" ry="22" fill="none" stroke="#1A1A2E" stroke-width="1.5"/>
+        <ellipse cx="36" cy="36" rx="22" ry="22" fill="none" stroke="#1A1A2E" stroke-width="1.5"/>
+      </svg>
+
+      <!-- LINDINHA (azul) — maior, centro -->
+      <svg width="84" height="108" viewBox="0 0 84 108" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="42" cy="78" rx="20" ry="24" fill="#40C4FF"/>
+        <ellipse cx="17" cy="78" rx="8" ry="5.5" fill="#FFD180" transform="rotate(-20 17 78)"/>
+        <ellipse cx="67" cy="78" rx="8" ry="5.5" fill="#FFD180" transform="rotate(20 67 78)"/>
+        <rect x="35" y="52" width="14" height="9" rx="4" fill="#FFD180"/>
+        <ellipse cx="42" cy="40" rx="25" ry="25" fill="#FFD180"/>
+        <ellipse cx="31" cy="38" rx="9" ry="10" fill="white"/>
+        <ellipse cx="53" cy="38" rx="9" ry="10" fill="white"/>
+        <circle cx="32" cy="39" r="6" fill="#1A1A2E"/>
+        <circle cx="54" cy="39" r="6" fill="#1A1A2E"/>
+        <circle cx="34" cy="37" r="2" fill="white"/>
+        <circle cx="56" cy="37" r="2" fill="white"/>
+        <ellipse cx="31" cy="38" rx="9" ry="10" fill="none" stroke="#1A1A2E" stroke-width="1.5"/>
+        <ellipse cx="53" cy="38" rx="9" ry="10" fill="none" stroke="#1A1A2E" stroke-width="1.5"/>
+        <!-- Cabelo azul liso -->
+        <ellipse cx="42" cy="18" rx="25" ry="10" fill="#1A1A2E"/>
+        <!-- Laço azul no topo -->
+        <ellipse cx="30" cy="14" rx="7" ry="5" fill="#40C4FF" transform="rotate(-30 30 14)"/>
+        <ellipse cx="54" cy="14" rx="7" ry="5" fill="#40C4FF" transform="rotate(30 54 14)"/>
+        <circle cx="42" cy="14" r="4" fill="#40C4FF"/>
+        <rect x="30" y="98" width="9" height="11" rx="4" fill="#FFD180"/>
+        <rect x="45" y="98" width="9" height="11" rx="4" fill="#FFD180"/>
+        <ellipse cx="34.5" cy="108" rx="7" ry="3.5" fill="#40C4FF"/>
+        <ellipse cx="49.5" cy="108" rx="7" ry="3.5" fill="#40C4FF"/>
+        <ellipse cx="42" cy="78" rx="20" ry="24" fill="none" stroke="#1A1A2E" stroke-width="1.5"/>
+        <ellipse cx="42" cy="40" rx="25" ry="25" fill="none" stroke="#1A1A2E" stroke-width="1.5"/>
+      </svg>
+
+      <!-- DOCINHO (rosa) -->
+      <svg width="72" height="96" viewBox="0 0 72 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="36" cy="68" rx="18" ry="22" fill="#FF4081"/>
+        <ellipse cx="14" cy="68" rx="7" ry="5" fill="#FFD180" transform="rotate(-20 14 68)"/>
+        <ellipse cx="58" cy="68" rx="7" ry="5" fill="#FFD180" transform="rotate(20 58 68)"/>
+        <rect x="30" y="44" width="12" height="8" rx="4" fill="#FFD180"/>
+        <ellipse cx="36" cy="36" rx="22" ry="22" fill="#FFD180"/>
+        <ellipse cx="27" cy="34" rx="8" ry="9" fill="white"/>
+        <ellipse cx="45" cy="34" rx="8" ry="9" fill="white"/>
+        <circle cx="28" cy="35" r="5" fill="#1A1A2E"/>
+        <circle cx="46" cy="35" r="5" fill="#1A1A2E"/>
+        <circle cx="30" cy="33" r="1.5" fill="white"/>
+        <circle cx="48" cy="33" r="1.5" fill="white"/>
+        <ellipse cx="27" cy="34" rx="8" ry="9" fill="none" stroke="#1A1A2E" stroke-width="1.5"/>
+        <ellipse cx="45" cy="34" rx="8" ry="9" fill="none" stroke="#1A1A2E" stroke-width="1.5"/>
+        <!-- Cabelo rosa cacheado -->
+        <ellipse cx="36" cy="16" rx="22" ry="10" fill="#FF4081"/>
+        <ellipse cx="15" cy="26" rx="9" ry="12" fill="#FF4081"/>
+        <ellipse cx="57" cy="26" rx="9" ry="12" fill="#FF4081"/>
+        <ellipse cx="36" cy="16" rx="22" ry="10" fill="none" stroke="#1A1A2E" stroke-width="1.2"/>
+        <rect x="26" y="86" width="8" height="10" rx="4" fill="#FFD180"/>
+        <rect x="38" y="86" width="8" height="10" rx="4" fill="#FFD180"/>
+        <ellipse cx="30" cy="95" rx="6" ry="3" fill="#FF4081"/>
+        <ellipse cx="42" cy="95" rx="6" ry="3" fill="#FF4081"/>
+        <ellipse cx="36" cy="68" rx="18" ry="22" fill="none" stroke="#1A1A2E" stroke-width="1.5"/>
+        <ellipse cx="36" cy="36" rx="22" ry="22" fill="none" stroke="#1A1A2E" stroke-width="1.5"/>
+      </svg>
+
+    </div><!-- /ppg-chars -->
+
+    <div class="logo-strip">
+      <div>
         <div class="logo-small">GRUPO</div>
         <div class="logo-big">KUHN</div>
       </div>
     </div>
+    <br>
     <div class="title-main">Roleta da <span>Sorte</span></div>
     <div class="subtitle">⚡ Gire e descubra seu prêmio! ⚡</div>
   </div>
@@ -366,82 +338,56 @@ input[type="text"]::placeholder { color:rgba(255,255,255,.25); font-weight:400; 
     <div class="card">
       <div class="card-title">💚 Hora de girar!</div>
       <div class="card-sub">Preencha seus dados para liberar a roleta</div>
-      <div class="field-group">
-        <label>👤 Seu nome</label>
-        <input type="text" id="input-nome" placeholder="Como você se chama?" autocomplete="off">
-      </div>
-      <div class="field-group">
-        <label>📍 Sua loja</label>
-        <input type="text" id="input-loja" placeholder="Ex: Altamira" autocomplete="off">
-      </div>
-      <div class="field-group">
-        <label>💸 Seu PIX</label>
-        <input type="text" id="input-pix" placeholder="CPF, e-mail ou telefone" autocomplete="off">
-      </div>
-      <div class="field-group">
-        <label>🔑 Senha da campanha</label>
-        <input type="text" id="input-senha" placeholder="Ex: Lindinha-123" autocomplete="off">
-      </div>
-      <button class="btn-primary" id="btn-entrar" onclick="validarAcesso()">Confirmar</button>
-      <div id="error-login" class="error-msg" style="display:none"></div>
+      <div class="fg"><label>👤 Seu nome</label><input type="text" id="input-nome" placeholder="Como você se chama?" autocomplete="off"></div>
+      <div class="fg"><label>📍 Sua loja</label><input type="text" id="input-loja" placeholder="Ex: ALTAMIRA" autocomplete="off"></div>
+      <div class="fg"><label>💸 Seu PIX</label><input type="text" id="input-pix" placeholder="CPF, e-mail ou telefone" autocomplete="off"></div>
+      <div class="fg"><label>🔑 Senha da campanha</label><input type="text" id="input-senha" placeholder="Ex: LINDINHA-847" autocomplete="off"></div>
+      <button class="btn-ok" id="btn-entrar" onclick="validarAcesso()">Confirmar</button>
+      <div id="error-login" class="err" style="display:none"></div>
     </div>
   </div>
 
   <!-- TELA 2: ROLETA -->
   <div id="screen-roleta" class="screen">
-    <div class="vendedor-badge">
+    <div class="badge">
       <span>Participante</span>
       <strong id="nome-display">—</strong>
     </div>
-    <div class="wheel-container">
-      <!-- SETA ROSA -->
-      <svg class="wheel-arrow" width="44" height="54" viewBox="0 0 44 54">
-        <polygon points="22,0 42,42 22,30 2,42" fill="#FF4081" stroke="#1A1A2E" stroke-width="2.5"/>
-        <circle cx="22" cy="42" r="11" fill="#FF4081" stroke="#1A1A2E" stroke-width="2.5"/>
-        <circle cx="22" cy="42" r="5" fill="white" opacity=".6"/>
-      </svg>
-      <div class="wheel-wrapper">
-        <canvas id="wheel-canvas" width="320" height="320"></canvas>
-        <div class="wheel-center">💥</div>
+    <div class="wheel-wrap">
+      <div class="wheel-ring">
+        <canvas id="wc" width="310" height="310"></canvas>
+        <div class="wheel-mid">💥</div>
       </div>
     </div>
-    <button class="btn-spin" id="btn-spin" onclick="girarRoleta()">
-      ⚡ GIRAR A ROLETA! ⚡
-    </button>
+    <button class="btn-spin" id="btn-spin" onclick="girarRoleta()">⚡ GIRAR A ROLETA! ⚡</button>
   </div>
 
   <!-- TELA 3: RESULTADO -->
   <div id="screen-resultado" class="screen">
-    <div class="resultado-card">
-      <div class="resultado-header">
-        <span class="resultado-emoji" id="res-emoji">🎉</span>
-        <div class="resultado-titulo">Parabéns! Você ganhou:</div>
-        <div class="resultado-premio" id="res-premio">—</div>
+    <div class="res-card">
+      <div class="res-head">
+        <span class="res-emoji" id="res-emoji">🎉</span>
+        <div class="res-titulo">Parabéns! Você ganhou:</div>
+        <div class="res-premio" id="res-premio">—</div>
       </div>
-      <div class="resultado-body">
-        <div class="info-row"><span class="info-label">Vendedor</span><span class="info-value" id="res-vendedor">—</span></div>
-        <div class="info-row"><span class="info-label">Loja</span><span class="info-value" id="res-loja">—</span></div>
-        <div class="info-row"><span class="info-label">PIX</span><span class="info-value" id="res-pix">—</span></div>
-        <div class="info-row"><span class="info-label">Data</span><span class="info-value" id="res-data">—</span></div>
-        <div class="codigo-cupom">
-          <div class="codigo-label">Código do cupom</div>
-          <div class="codigo-valor" id="res-codigo">—</div>
+      <div class="res-body">
+        <div class="info-row"><span class="il">Vendedor</span><span class="iv" id="res-vendedor">—</span></div>
+        <div class="info-row"><span class="il">Loja</span><span class="iv" id="res-loja">—</span></div>
+        <div class="info-row"><span class="il">PIX</span><span class="iv" id="res-pix">—</span></div>
+        <div class="info-row"><span class="il">Data</span><span class="iv" id="res-data">—</span></div>
+        <div class="cod-box">
+          <div class="cod-label">Código do cupom</div>
+          <div class="cod-val" id="res-codigo">—</div>
         </div>
       </div>
     </div>
   </div>
 
-</div>
+</div><!-- /wrap -->
 
 <script>
-// ================================================================
-// URL DO APPS SCRIPT
-// ================================================================
 const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwdXzKRG0Eg8bCmmeKbgA8Bl-ktHe4icYa8BQYiPr4sza9PP4w-vTewQsPTPnZQEaEY/exec';
 
-// ================================================================
-// ESTADO
-// ================================================================
 let premios     = [];
 let nomeAtual   = '';
 let lojaAtual   = '';
@@ -450,46 +396,31 @@ let senhaAtual  = '';
 let isSpinning  = false;
 let jaGirou     = false;
 let anguloAtual = 0;
+let premioSorteado = null;
 
-// Cores PPG: verde, rosa, azul, preto, branco + variações
-const CORES = [
-  '#00C853','#FF4081','#40C4FF','#1A1A2E','#E040FB',
-  '#00BCD4','#FF6D00','#76FF03','#FF1744','#00E5FF'
-];
+const CORES = ['#00C853','#FF4081','#40C4FF','#E040FB','#FF6D00','#00BCD4','#76FF03','#FF1744','#FFD740','#1A237E'];
 
 function mostrarTela(id) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
 }
 
-// ================================================================
-// JSONP
-// ================================================================
 function jsonp(url) {
   return new Promise((resolve, reject) => {
-    const cbName = '__cb_' + Date.now() + '_' + Math.floor(Math.random() * 99999);
-    const script = document.createElement('script');
-    const timer  = setTimeout(() => { cleanup(); reject(new Error('timeout')); }, 12000);
-
-    function cleanup() {
-      clearTimeout(timer);
-      delete window[cbName];
-      if (script.parentNode) script.parentNode.removeChild(script);
-    }
-
-    window[cbName] = function(data) { cleanup(); resolve(data); };
-    script.onerror = function() { cleanup(); reject(new Error('erro')); };
-    script.src = url + (url.includes('?') ? '&' : '?') + 'callback=' + cbName;
-    document.head.appendChild(script);
+    const cb   = '__cb_' + Date.now() + '_' + Math.floor(Math.random()*99999);
+    const el   = document.createElement('script');
+    const tmr  = setTimeout(() => { clean(); reject(new Error('timeout')); }, 12000);
+    function clean() { clearTimeout(tmr); delete window[cb]; if (el.parentNode) el.parentNode.removeChild(el); }
+    window[cb]  = d => { clean(); resolve(d); };
+    el.onerror  = () => { clean(); reject(new Error('erro')); };
+    el.src      = url + (url.includes('?') ? '&' : '?') + 'callback=' + cb;
+    document.head.appendChild(el);
   });
 }
 
-// ================================================================
-// TELA 1 — LOGIN
-// ================================================================
 document.addEventListener('DOMContentLoaded', () => {
   ['input-nome','input-loja','input-pix','input-senha'].forEach(id => {
-    document.getElementById(id).addEventListener('keypress', e => { if (e.key === 'Enter') validarAcesso(); });
+    document.getElementById(id).addEventListener('keypress', e => { if (e.key==='Enter') validarAcesso(); });
   });
 });
 
@@ -499,198 +430,150 @@ async function validarAcesso() {
   const pix   = document.getElementById('input-pix').value.trim();
   const senha = document.getElementById('input-senha').value.trim().toUpperCase();
   const btn   = document.getElementById('btn-entrar');
-
   document.getElementById('error-login').style.display = 'none';
 
-  if (!nome)  { mostrarErro('Informe seu nome.');   return; }
-  if (!loja)  { mostrarErro('Informe sua loja.');   return; }
-  if (!pix)   { mostrarErro('Informe seu PIX.');    return; }
-  if (!senha) { mostrarErro('Informe a senha.');    return; }
+  if (!nome)  { erro('Informe seu nome.');   return; }
+  if (!loja)  { erro('Informe sua loja.');   return; }
+  if (!pix)   { erro('Informe seu PIX.');    return; }
+  if (!senha) { erro('Informe a senha.');    return; }
 
-  btn.innerHTML = '<span class="loading"></span>Verificando...';
+  btn.innerHTML = '<span class="ld"></span>Verificando...';
   btn.disabled  = true;
 
   try {
-    const url = APPS_SCRIPT_URL
-      + '?acao=validar'
-      + '&senha=' + encodeURIComponent(senha)
-      + '&nome='  + encodeURIComponent(nome)
-      + '&loja='  + encodeURIComponent(loja)
-      + '&pix='   + encodeURIComponent(pix);
-
-    const data = await jsonp(url);
-
+    const data = await jsonp(APPS_SCRIPT_URL + '?acao=validar&senha=' + encodeURIComponent(senha) + '&nome=' + encodeURIComponent(nome) + '&loja=' + encodeURIComponent(loja) + '&pix=' + encodeURIComponent(pix));
     if (data.ok) {
-      nomeAtual  = nome;
-      lojaAtual  = loja;
-      pixAtual   = pix;
-      senhaAtual = senha;
-      premios    = data.premios;
+      nomeAtual = nome; lojaAtual = loja; pixAtual = pix; senhaAtual = senha;
+      premios   = data.premios;
       irParaRoleta();
     } else {
-      mostrarErro(data.mensagem || 'Senha inválida ou já utilizada.');
-      btn.innerHTML = 'Confirmar';
-      btn.disabled  = false;
+      erro(data.mensagem || 'Senha inválida ou já utilizada.');
+      btn.innerHTML = 'Confirmar'; btn.disabled = false;
     }
-  } catch (e) {
-    mostrarErro('Erro de conexão. Tente novamente.');
-    console.error(e);
-    btn.innerHTML = 'Confirmar';
-    btn.disabled  = false;
+  } catch(e) {
+    erro('Erro de conexão. Tente novamente.');
+    btn.innerHTML = 'Confirmar'; btn.disabled = false;
   }
 }
 
-function mostrarErro(msg) {
+function erro(msg) {
   const el = document.getElementById('error-login');
-  el.textContent   = msg;
-  el.style.display = 'block';
+  el.textContent = msg; el.style.display = 'block';
 }
 
-// ================================================================
-// TELA 2 — ROLETA
-// ================================================================
 function irParaRoleta() {
   document.getElementById('nome-display').textContent = nomeAtual;
   mostrarTela('screen-roleta');
-  desenharRoleta(0);
+  desenhar(0);
 }
 
-function desenharRoleta(angulo) {
-  const canvas = document.getElementById('wheel-canvas');
-  const ctx    = canvas.getContext('2d');
-  const cx = canvas.width / 2, cy = canvas.height / 2;
-  const raio   = cx - 4;
-  const total  = premios.length;
-  if (!total) return;
+function desenhar(ang) {
+  const cv  = document.getElementById('wc');
+  const ctx = cv.getContext('2d');
+  const cx  = cv.width/2, cy = cv.height/2, r = cx - 4;
+  const n   = premios.length;
+  if (!n) return;
+  const arc = (2*Math.PI)/n;
+  ctx.clearRect(0, 0, cv.width, cv.height);
 
-  const arcSize = (2 * Math.PI) / total;
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-  for (let i = 0; i < total; i++) {
-    const inicio = angulo + i * arcSize - Math.PI / 2;
-    const fim    = inicio + arcSize;
-
-    // Fatia
-    ctx.beginPath(); ctx.moveTo(cx, cy); ctx.arc(cx, cy, raio, inicio, fim); ctx.closePath();
+  for (let i = 0; i < n; i++) {
+    const ini = ang + i*arc - Math.PI/2;
+    const fim = ini + arc;
+    ctx.beginPath(); ctx.moveTo(cx,cy); ctx.arc(cx,cy,r,ini,fim); ctx.closePath();
     ctx.fillStyle = CORES[i % CORES.length]; ctx.fill();
-    ctx.strokeStyle = 'rgba(0,0,0,0.5)'; ctx.lineWidth = 3; ctx.stroke();
+    ctx.strokeStyle = 'rgba(0,0,0,.55)'; ctx.lineWidth = 2.5; ctx.stroke();
 
-    // Borda interna branca fina
-    ctx.strokeStyle = 'rgba(255,255,255,0.2)'; ctx.lineWidth = 1; ctx.stroke();
-
-    // Texto
-    ctx.save(); ctx.translate(cx, cy); ctx.rotate(inicio + arcSize / 2);
-    const emoji = premios[i].emoji || '🎁';
-    const label = (premios[i].nome || '').substring(0, 13) + ((premios[i].nome || '').length > 13 ? '…' : '');
-    const tx    = raio - 12;
+    ctx.save(); ctx.translate(cx,cy); ctx.rotate(ini + arc/2);
+    const lbl = (premios[i].nome||'').substring(0,13) + ((premios[i].nome||'').length>13?'…':'');
+    const em  = premios[i].emoji || '🎁';
+    const tx  = r - 12;
     ctx.textAlign = 'right'; ctx.fillStyle = 'white';
-    ctx.shadowColor = 'rgba(0,0,0,0.8)'; ctx.shadowBlur = 4;
-    ctx.font = 'bold 13px Nunito, sans-serif'; ctx.fillText(label, tx, 5);
-    ctx.font = '16px serif'; ctx.shadowBlur = 3;
-    ctx.fillText(emoji, tx - ctx.measureText(label).width - 4, 6);
+    ctx.shadowColor = 'rgba(0,0,0,.9)'; ctx.shadowBlur = 4;
+    ctx.font = 'bold 12px Nunito,sans-serif'; ctx.fillText(lbl, tx, 5);
+    ctx.font = '15px serif'; ctx.shadowBlur = 3;
+    ctx.fillText(em, tx - ctx.measureText(lbl).width - 4, 6);
     ctx.restore();
   }
 
-  // Centro escuro
-  ctx.beginPath(); ctx.arc(cx, cy, 30, 0, 2 * Math.PI);
-  ctx.fillStyle = '#1A1A2E'; ctx.fill();
-  ctx.strokeStyle = '#00C853'; ctx.lineWidth = 3; ctx.stroke();
+  ctx.beginPath(); ctx.arc(cx,cy,28,0,2*Math.PI);
+  ctx.fillStyle = '#111122'; ctx.fill();
+  ctx.strokeStyle = '#FF4081'; ctx.lineWidth = 3; ctx.stroke();
 }
 
 function girarRoleta() {
   if (isSpinning || jaGirou) return;
-  jaGirou    = true;
-  isSpinning = true;
+  jaGirou = isSpinning = true;
   document.getElementById('btn-spin').disabled = true;
 
-  const premioCerto   = sortearPremio();
-  const idx           = premios.findIndex(p => p.nome === premioCerto.nome);
-  const arcSize       = (2 * Math.PI) / premios.length;
+  // Sorteia PRIMEIRO
+  premioSorteado = sortear();
 
-  const centroSegmento = idx * arcSize + arcSize / 2 - Math.PI / 2;
-  const anguloDestino  = -centroSegmento;
+  // Gira por um tempo aleatório — animação decorativa apenas
+  const voltas  = 5 + Math.floor(Math.random() * 5);
+  const angFim  = anguloAtual + voltas * 2 * Math.PI + Math.random() * 2 * Math.PI;
+  const dur     = 4000 + Math.random() * 1500;
+  const tIni    = performance.now();
+  const aIni    = anguloAtual;
 
-  const voltas      = 6 + Math.floor(Math.random() * 4);
-  const anguloFinal = anguloAtual
-    + (((anguloDestino - anguloAtual) % (2 * Math.PI) + 2 * Math.PI) % (2 * Math.PI))
-    + voltas * 2 * Math.PI;
-
-  const duracao = 4500 + Math.random() * 1000;
-  const tInicio = performance.now();
-  const aInicio = anguloAtual;
-
-  function animar(agora) {
-    const t     = Math.min((agora - tInicio) / duracao, 1);
-    const ease  = 1 - Math.pow(1 - t, 4);
-    anguloAtual = aInicio + (anguloFinal - aInicio) * ease;
-    desenharRoleta(anguloAtual);
+  function animar(now) {
+    const t    = Math.min((now - tIni) / dur, 1);
+    const ease = 1 - Math.pow(1-t, 4);
+    anguloAtual = aIni + (angFim - aIni) * ease;
+    desenhar(anguloAtual);
     if (t < 1) { requestAnimationFrame(animar); }
-    else { isSpinning = false; setTimeout(() => mostrarResultado(premioCerto), 700); }
+    else { isSpinning = false; setTimeout(() => mostrarResultado(premioSorteado), 600); }
   }
   requestAnimationFrame(animar);
 }
 
-function sortearPremio() {
-  const total = premios.reduce((s, p) => s + (Number(p.probabilidade) || 1), 0);
-  let rand = Math.random() * total;
-  for (const p of premios) { rand -= (Number(p.probabilidade) || 1); if (rand <= 0) return p; }
-  return premios[premios.length - 1];
+function sortear() {
+  const total = premios.reduce((s,p) => s + (Number(p.probabilidade)||1), 0);
+  let r = Math.random() * total;
+  for (const p of premios) { r -= (Number(p.probabilidade)||1); if (r<=0) return p; }
+  return premios[premios.length-1];
 }
 
-// ================================================================
-// TELA 3 — RESULTADO
-// ================================================================
 async function mostrarResultado(premio) {
-  const codigo  = gerarCodigo();
-  const agora   = new Date();
-  const dataStr = agora.toLocaleDateString('pt-BR') + ' ' + agora.toLocaleTimeString('pt-BR', {hour:'2-digit',minute:'2-digit'});
+  const cod  = gerarCod();
+  const now  = new Date();
+  const data = now.toLocaleDateString('pt-BR') + ' ' + now.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});
 
   try {
-    const url = APPS_SCRIPT_URL
-      + '?acao=registrar'
-      + '&senha=' + encodeURIComponent(senhaAtual)
-      + '&nome='  + encodeURIComponent(nomeAtual)
-      + '&loja='  + encodeURIComponent(lojaAtual)
-      + '&pix='   + encodeURIComponent(pixAtual)
-      + '&premio='+ encodeURIComponent(premio.nome)
-      + '&codigo='+ encodeURIComponent(codigo);
-    jsonp(url).catch(() => {});
-  } catch(e) {}
+    jsonp(APPS_SCRIPT_URL + '?acao=registrar&senha=' + encodeURIComponent(senhaAtual) + '&nome=' + encodeURIComponent(nomeAtual) + '&loja=' + encodeURIComponent(lojaAtual) + '&pix=' + encodeURIComponent(pixAtual) + '&premio=' + encodeURIComponent(premio.nome) + '&codigo=' + encodeURIComponent(cod)).catch(()=>{});
+  } catch(e){}
 
   document.getElementById('res-emoji').textContent    = premio.emoji || '🎉';
   document.getElementById('res-premio').textContent   = premio.nome;
   document.getElementById('res-vendedor').textContent = nomeAtual;
   document.getElementById('res-loja').textContent     = lojaAtual;
   document.getElementById('res-pix').textContent      = pixAtual;
-  document.getElementById('res-data').textContent     = dataStr;
-  document.getElementById('res-codigo').textContent   = codigo;
+  document.getElementById('res-data').textContent     = data;
+  document.getElementById('res-codigo').textContent   = cod;
 
   mostrarTela('screen-resultado');
-  lancarConfetti();
+  confetti();
 }
 
-function gerarCodigo() {
-  const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
-  let c = 'KB-';
-  for (let i = 0; i < 6; i++) c += chars[Math.floor(Math.random() * chars.length)];
-  return c;
+function gerarCod() {
+  const c = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+  let s = 'KB-';
+  for (let i=0;i<6;i++) s += c[Math.floor(Math.random()*c.length)];
+  return s;
 }
 
-function lancarConfetti() {
+function confetti() {
   const cores = ['#00C853','#FF4081','#40C4FF','#E040FB','#76FF03','#FFD740'];
-  for (let i = 0; i < 70; i++) {
-    setTimeout(() => {
-      const el = document.createElement('div');
-      el.className = 'confetti-piece';
-      el.style.left              = Math.random() * 100 + 'vw';
-      el.style.backgroundColor   = cores[Math.floor(Math.random() * cores.length)];
-      el.style.width             = (6 + Math.random() * 10) + 'px';
-      el.style.height            = (6 + Math.random() * 10) + 'px';
-      el.style.animationDuration = (1.5 + Math.random() * 2) + 's';
-      document.body.appendChild(el);
-      setTimeout(() => el.remove(), 4000);
-    }, i * 30);
-  }
+  for (let i=0;i<70;i++) setTimeout(()=>{
+    const el = document.createElement('div');
+    el.className = 'cf';
+    el.style.left = Math.random()*100+'vw';
+    el.style.backgroundColor = cores[Math.floor(Math.random()*cores.length)];
+    el.style.width  = (6+Math.random()*10)+'px';
+    el.style.height = (6+Math.random()*10)+'px';
+    el.style.animationDuration = (1.5+Math.random()*2)+'s';
+    document.body.appendChild(el);
+    setTimeout(()=>el.remove(),4000);
+  }, i*28);
 }
 </script>
 </body>
